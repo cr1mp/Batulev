@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Batulev.Shell.Properties
+namespace Shell.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace Batulev.Shell.Properties
 			{
 				if ( ( resourceMan == null ) )
 				{
-					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Batulev.Shell.Properties.Resources", typeof(Resources).Assembly);
+					global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Shell.Properties.Resources", typeof(Resources).Assembly);
 					resourceMan = temp;
 				}
 				return resourceMan;

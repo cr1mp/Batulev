@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Batulev.Shell.Properties
+namespace Shell.Properties
 {
 
 
