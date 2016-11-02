@@ -20,20 +20,25 @@ namespace OptimizationMethods.Views
 	/// <summary>
 	/// Interaction logic for OptimizationMethodsNavigationItemView.xaml
 	/// </summary>
-	public partial class OptimizationMethodsNavigationItemView : UserControl
+	[ViewSortHint("01")]
+	public partial class OptimizationMethodsNavigationItemView : NavigationItemUserControl
 	{
 		private static readonly Uri OptimizationMethodsMainViewUri = new Uri("/OptimizationMethodsMainView", UriKind.Relative);
 
-		private readonly IRegionManager _regionManager;
+		
 
 		public OptimizationMethodsNavigationItemView(IRegionManager regionManager)
+			:base(regionManager)
 		{
-			_regionManager = regionManager;
-
 			InitializeComponent();
 		}
 
-		private void RadioButton_Click(object sender, RoutedEventArgs e)
+		protected override void UpdateNavigationButtonState(Uri uri)
+		{
+			NavigateToOptimizationMethodsMainRadioButton.IsChecked = (uri == OptimizationMethodsMainViewUri);
+		}
+
+		private void NavigateToOptimizationMethodsMainRadioButton_OnClick(object sender, RoutedEventArgs e)
 		{
 			_regionManager.RequestNavigate(RegionNames.MainContentRegion, OptimizationMethodsMainViewUri);
 		}

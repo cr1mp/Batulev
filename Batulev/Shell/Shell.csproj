@@ -87,6 +87,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Theme\Theme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -131,6 +139,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MathematicalMethodsAnalysisComplexSystems\MathematicalMethodsAnalysisComplexSystems.csproj">
+      <Project>{3fb7af9b-16c2-4dae-b46e-3ec1e3aad2f9}</Project>
+      <Name>MathematicalMethodsAnalysisComplexSystems</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OptimizationMethods\OptimizationMethods.csproj">
       <Project>{1addc1f1-4a51-40f9-acab-a5f0d6499333}</Project>
       <Name>OptimizationMethods</Name>

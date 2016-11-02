@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}</ProjectGuid>
+    <ProjectGuid>{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OptimizationMethods</RootNamespace>
-    <AssemblyName>OptimizationMethods</AssemblyName>
+    <RootNamespace>MathematicalMethodsAnalysisComplexSystems</RootNamespace>
+    <AssemblyName>MathematicalMethodsAnalysisComplexSystems</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,8 +62,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
       <Private>True</Private>
@@ -79,52 +76,33 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OptimizationMethodsModule.cs" />
+    <Compile Include="MathematicalMethodsAnalysisComplexSystems.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="OptimizationMethodsRegionNames.cs" />
-    <Compile Include="Views\Labs\Lab1View.xaml.cs">
-      <DependentUpon>Lab1View.xaml</DependentUpon>
+    <Compile Include="Views\MathematicalMethodsAnalysisComplexSystemsMainView.xaml.cs">
+      <DependentUpon>MathematicalMethodsAnalysisComplexSystemsMainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Labs\Lab2View.xaml.cs">
-      <DependentUpon>Lab2View.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OptimizationMethodsMainView.xaml.cs">
-      <DependentUpon>OptimizationMethodsMainView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OptimizationMethodsNavigationItemView.xaml.cs">
-      <DependentUpon>OptimizationMethodsNavigationItemView.xaml</DependentUpon>
+    <Compile Include="Views\MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml.cs">
+      <DependentUpon>MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\MathematicalMethodsAnalysisComplexSystemsMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
-      <Project>{5f9ecbd0-ec14-4472-8091-0eb9f404bc8c}</Project>
+      <Project>{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}</Project>
       <Name>Infrastructure</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\Labs\Lab1View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Labs\Lab2View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OptimizationMethodsMainView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OptimizationMethodsNavigationItemView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
