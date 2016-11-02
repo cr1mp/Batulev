@@ -5,6 +5,11 @@
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="{Binding Title}" Height="350" Width="525">
     <Grid>
-        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+		<ItemsControl prism:RegionManager.RegionName="MainNavigationRegion"></ItemsControl>
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainContentRegion" />
     </Grid>
 </Window>

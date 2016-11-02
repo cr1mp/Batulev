@@ -5,6 +5,20 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shell", "Shell\Shell.csproj", "{99C9E82C-C594-446D-AA59-8FFBC43AD226}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Нечеткий анализ и моделирование", "Нечеткий анализ и моделирование", "{08AA981F-A6F7-4476-B868-37C2F89BEE9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Основы педагогики в высшей школе", "Основы педагогики в высшей школе", "{D714348C-3AE9-4851-8C84-C31D307A257D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Интелектуальные системы", "Интелектуальные системы", "{32C557BF-0A8B-40AA-A217-A72FA3A3C8A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Методы оптимизации", "Методы оптимизации", "{23100B13-AA60-4B08-9D51-76AD6C8F5104}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Математические методы анализа сложных систем", "Математические методы анализа сложных систем", "{3BD7C45F-4241-48C8-B794-C50D6D5613B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OptimizationMethods", "OptimizationMethods\OptimizationMethods.csproj", "{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +29,19 @@ Global
 		{99C9E82C-C594-446D-AA59-8FFBC43AD226}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99C9E82C-C594-446D-AA59-8FFBC43AD226}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99C9E82C-C594-446D-AA59-8FFBC43AD226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F9ECBD0-EC14-4472-8091-0EB9F404BC8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333} = {23100B13-AA60-4B08-9D51-76AD6C8F5104}
 	EndGlobalSection
 EndGlobal
