@@ -28,7 +28,7 @@ namespace OptimizationMethods.Views
 		
 
 		public OptimizationMethodsNavigationItemView(IRegionManager regionManager)
-			:base(regionManager)
+			:base(regionManager, RegionNames.MainContentRegion)
 		{
 			InitializeComponent();
 		}

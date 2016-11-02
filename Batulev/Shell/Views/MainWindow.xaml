@@ -1,4 +1,5 @@
-﻿<Window x:Class="Shell.Views.MainWindow"
+﻿<Controls:MetroWindow x:Class="Shell.Views.MainWindow"
+		xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
@@ -12,4 +13,4 @@
 		<ItemsControl prism:RegionManager.RegionName="MainNavigationRegion"></ItemsControl>
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainContentRegion" />
     </Grid>
-</Window>
+</Controls:MetroWindow>

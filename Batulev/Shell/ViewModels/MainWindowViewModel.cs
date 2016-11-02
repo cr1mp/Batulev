@@ -4,7 +4,7 @@ namespace Shell.ViewModels
 {
 	public class MainWindowViewModel : BindableBase
 	{
-		private string _title = "Prism Unity Application";
+		private string _title = "Батулев Артем Игоревич";
 		public string Title
 		{
 			get { return _title; }

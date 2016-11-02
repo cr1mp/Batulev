@@ -26,7 +26,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 		private static Uri MathematicalMethodsAnalysisComplexSystemsMainViewUri = new Uri("/MathematicalMethodsAnalysisComplexSystemsMainView", UriKind.Relative);
 
 		public MathematicalMethodsAnalysisComplexSystemsNavigationItemView(IRegionManager regionManager) 
-			: base(regionManager)
+			: base(regionManager, RegionNames.MainContentRegion)
 		{
 			InitializeComponent();
 		}

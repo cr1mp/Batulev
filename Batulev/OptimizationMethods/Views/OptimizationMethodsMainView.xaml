@@ -1,4 +1,5 @@
-﻿<UserControl x:Class="OptimizationMethods.Views.OptimizationMethodsMainView"
+﻿<we:NavigationItemUserControl x:Class="OptimizationMethods.Views.OptimizationMethodsMainView"
+			 xmlns:we="clr-namespace:Infrastructure;assembly=Infrastructure"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -14,9 +15,9 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<ItemsControl prism:RegionManager.RegionName="LaboratoryWorkNavigationRegion">
-			<RadioButton x:Name="Lab1" Click="Lab1_OnClick">Лабораторная работа №1</RadioButton>
-			<RadioButton x:Name="Lab2" Click="Lab2_OnClick">Лабораторная работа №2</RadioButton>
+			<ToggleButton x:Name="Lab1" Click="Lab1_OnClick">Лабораторная работа №1</ToggleButton>
+			<ToggleButton x:Name="Lab2" Click="Lab2_OnClick">Лабораторная работа №2</ToggleButton>
 		</ItemsControl>
 		<ContentControl Grid.Column="1" prism:RegionManager.RegionName="LaboratoryWorkContentRegion" />
 	</Grid>
-</UserControl>
+</we:NavigationItemUserControl>

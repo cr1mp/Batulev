@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-		<RadioButton x:Name="NavigateToMathematicalMethodsAnalysisComplexSystemsMainRadioButton" Click="NavigateToRadioButton_OnClick" Style="{StaticResource MainViewRadioButtonStyle}">Математические методы анализа сложных систем</RadioButton>
+		<ToggleButton x:Name="NavigateToMathematicalMethodsAnalysisComplexSystemsMainRadioButton" Click="NavigateToRadioButton_OnClick">Математические методы анализа сложных систем</ToggleButton>
     </Grid>
 </we:NavigationItemUserControl>

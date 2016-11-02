@@ -8,6 +8,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-		<RadioButton x:Name="NavigateToOptimizationMethodsMainRadioButton" Click="NavigateToOptimizationMethodsMainRadioButton_OnClick" Style="{StaticResource MainViewRadioButtonStyle}">Методы оптимизации</RadioButton>
+		<ToggleButton x:Name="NavigateToOptimizationMethodsMainRadioButton" Click="NavigateToOptimizationMethodsMainRadioButton_OnClick">Методы оптимизации</ToggleButton>
     </Grid>
 </we:NavigationItemUserControl>

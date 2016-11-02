@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Infrastructure;
 using Prism.Regions;
 
 namespace OptimizationMethods.Views
@@ -19,19 +20,25 @@ namespace OptimizationMethods.Views
 	/// <summary>
 	/// Interaction logic for OptimizationMethodsMainView.xaml
 	/// </summary>
-	public partial class OptimizationMethodsMainView : UserControl
+	public partial class OptimizationMethodsMainView : NavigationItemUserControl
 	{
 		private static Uri Lab1ViewUri = new Uri("/Labs/Lab1View", UriKind.Relative);
 		private static Uri Lab2ViewUri = new Uri("/Labs/Lab2View", UriKind.Relative);
 
-		private readonly IRegionManager _regionManager;
-
 		public OptimizationMethodsMainView(IRegionManager regionManager)
+			:base(regionManager, OptimizationMethodsRegionNames.LaboratoryWorkContentRegion)
 		{
-			_regionManager = regionManager;
+			
 
 			InitializeComponent();
 		}
+
+		protected override void UpdateNavigationButtonState(Uri uri)
+		{
+			Lab1.IsChecked=(uri== Lab1ViewUri);
+			Lab2.IsChecked=(uri== Lab2ViewUri);
+		}
+
 		private void Lab1_OnClick(object sender, RoutedEventArgs e)
 		{
 			_regionManager.RequestNavigate(OptimizationMethodsRegionNames.LaboratoryWorkContentRegion, Lab1ViewUri);
@@ -44,5 +51,6 @@ namespace OptimizationMethods.Views
 		}
 
 
+		
 	}
 }

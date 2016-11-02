@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Infrastructure;
 using Microsoft.Practices.Unity;
 using OptimizationMethods.Views;
+using OptimizationMethods.Views.Labs;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
@@ -30,6 +31,12 @@ namespace OptimizationMethods
 
 			_unityContainer.RegisterType<OptimizationMethodsMainView>();
 			_unityContainer.RegisterTypeForNavigation<OptimizationMethodsMainView>();
+
+			_unityContainer.RegisterType<Lab1View>();
+			_unityContainer.RegisterTypeForNavigation<Lab1View>();
+
+			_unityContainer.RegisterType<Lab2View>();
+			_unityContainer.RegisterTypeForNavigation<Lab2View>();
 
 			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion,typeof(OptimizationMethodsNavigationItemView));
 		}

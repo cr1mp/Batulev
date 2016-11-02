@@ -12,11 +12,11 @@ namespace Infrastructure
 	{
 		protected readonly IRegionManager _regionManager;
 
-		public NavigationItemUserControl(IRegionManager regionManager)
+		public NavigationItemUserControl(IRegionManager regionManager,string regionName)
 		{
 			_regionManager = regionManager;
 
-			IRegion mainContentRegion = _regionManager.Regions[RegionNames.MainContentRegion];
+			IRegion mainContentRegion = _regionManager.Regions[regionName];
 			if (mainContentRegion != null && mainContentRegion.NavigationService != null)
 			{
 				mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
