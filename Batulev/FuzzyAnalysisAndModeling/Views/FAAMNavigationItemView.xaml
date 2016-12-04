@@ -1,0 +1,13 @@
+﻿<we:NavigationItemUserControl x:Class="FuzzyAnalysisAndModeling.Views.FAAMNavigationItemView"
+			 xmlns:we="clr-namespace:Infrastructure;assembly=Infrastructure"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FuzzyAnalysisAndModeling.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+		<ToggleButton x:Name="NavigateToFAAMMainRadioButton" Click="NavigateToFAAMMainViewRadioButton_OnClick">Нечеткий анализ и моделирование</ToggleButton>
+	</Grid>
+</we:NavigationItemUserControl>

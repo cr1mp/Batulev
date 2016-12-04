@@ -13,13 +13,12 @@ using Prism.Unity;
 
 namespace OptimizationMethods
 {
-	//[Module(ModuleName = nameof(OptimizationMethodsModule), OnDemand = true)]
-	public class OptimizationMethodsModule : IModule
+	public class OMModule : IModule
 	{
 		private readonly IUnityContainer _unityContainer;
 		private readonly IRegionManager _regionManager;
 
-		public OptimizationMethodsModule(IUnityContainer unityContainer,IRegionManager regionManager)
+		public OMModule(IUnityContainer unityContainer,IRegionManager regionManager)
 		{
 			_unityContainer = unityContainer;
 			_regionManager = regionManager;

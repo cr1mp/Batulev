@@ -92,6 +92,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Resources\ToggleButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -136,6 +140,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BasicsOfPedagogyInHigherEducation\BasicsOfPedagogyInHigherEducation.csproj">
+      <Project>{60171ca4-ab6b-4a7e-bcdf-e8edf49b2632}</Project>
+      <Name>BasicsOfPedagogyInHigherEducation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FuzzyAnalysisAndModeling\FuzzyAnalysisAndModeling.csproj">
+      <Project>{5cd684a6-938b-4c27-9787-e2216382662c}</Project>
+      <Name>FuzzyAnalysisAndModeling</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IntelligentSystems\IntelligentSystems.csproj">
+      <Project>{5df2b7be-6474-4a5b-8569-a931116f4e61}</Project>
+      <Name>IntelligentSystems</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MathematicalMethodsAnalysisComplexSystems\MathematicalMethodsAnalysisComplexSystems.csproj">
       <Project>{3fb7af9b-16c2-4dae-b46e-3ec1e3aad2f9}</Project>
       <Name>MathematicalMethodsAnalysisComplexSystems</Name>
@@ -145,6 +161,7 @@
       <Name>OptimizationMethods</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

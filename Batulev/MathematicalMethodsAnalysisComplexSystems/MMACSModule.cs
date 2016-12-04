@@ -25,12 +25,12 @@ namespace MathematicalMethodsAnalysisComplexSystems
 
 		public void Initialize()
 		{
-			_unityContainer.RegisterType<MathematicalMethodsAnalysisComplexSystemsNavigationItemView>();
+			_unityContainer.RegisterType<MMACSNavigationItemView>();
 
-			_unityContainer.RegisterType<MathematicalMethodsAnalysisComplexSystemsMainView>();
-			_unityContainer.RegisterTypeForNavigation<MathematicalMethodsAnalysisComplexSystemsMainView>();
+			_unityContainer.RegisterType<MMACSMainView>();
+			_unityContainer.RegisterTypeForNavigation<MMACSMainView>();
 
-			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(MathematicalMethodsAnalysisComplexSystemsNavigationItemView));
+			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(MMACSNavigationItemView));
 		}
 	}
 }

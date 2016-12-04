@@ -79,22 +79,22 @@
   <ItemGroup>
     <Compile Include="MMACSModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\MathematicalMethodsAnalysisComplexSystemsMainView.xaml.cs">
-      <DependentUpon>MathematicalMethodsAnalysisComplexSystemsMainView.xaml</DependentUpon>
+    <Compile Include="Views\MMACSMainView.xaml.cs">
+      <DependentUpon>MMACSMainView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml.cs">
-      <DependentUpon>MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml</DependentUpon>
+    <Compile Include="Views\MMACSNavigationItemView.xaml.cs">
+      <DependentUpon>MMACSNavigationItemView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Views\MathematicalMethodsAnalysisComplexSystemsMainView.xaml">
+    <Page Include="Views\MMACSMainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml">
+    <Page Include="Views\MMACSNavigationItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

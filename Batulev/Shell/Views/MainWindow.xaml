@@ -1,16 +1,22 @@
-﻿<Controls:MetroWindow x:Class="Shell.Views.MainWindow"
-		xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+﻿<controls:MetroWindow x:Class="Shell.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True"
-        Title="{Binding Title}" Height="350" Width="525">
+        Title="{Binding Title}"
+		Height="600"
+		Width="800"
+		GlowBrush="{DynamicResource AccentColorBrush}">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition/>
         </Grid.ColumnDefinitions>
 		<ItemsControl prism:RegionManager.RegionName="MainNavigationRegion"></ItemsControl>
-        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="MainContentRegion" />
+		<GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
+        <ContentControl Grid.Column="2" prism:RegionManager.RegionName="MainContentRegion" />
     </Grid>
-</Controls:MetroWindow>
+</controls:MetroWindow>
+

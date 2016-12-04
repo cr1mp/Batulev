@@ -21,11 +21,11 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 	/// Interaction logic for MathematicalMethodsAnalysisComplexSystemsNavigationItemView.xaml
 	/// </summary>
 	[ViewSortHint("02")]
-	public partial class MathematicalMethodsAnalysisComplexSystemsNavigationItemView : NavigationItemUserControl
+	public partial class MMACSNavigationItemView : NavigationItemUserControl
 	{
-		private static Uri MathematicalMethodsAnalysisComplexSystemsMainViewUri = new Uri("/MathematicalMethodsAnalysisComplexSystemsMainView", UriKind.Relative);
+		private static Uri MMACSMainViewUri = new Uri("/MMACSMainView", UriKind.Relative);
 
-		public MathematicalMethodsAnalysisComplexSystemsNavigationItemView(IRegionManager regionManager) 
+		public MMACSNavigationItemView(IRegionManager regionManager) 
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
 		}
@@ -37,14 +37,12 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 
 		protected override void UpdateNavigationButtonState(Uri uri)
 		{
-			NavigateToMathematicalMethodsAnalysisComplexSystemsMainRadioButton.IsChecked = (uri == MathematicalMethodsAnalysisComplexSystemsMainViewUri);
+			NavigateToMMACSMainRadioButton.IsChecked = (uri == MMACSMainViewUri);
 		}
 
-		private void NavigateToRadioButton_OnClick(object sender, RoutedEventArgs e)
+		private void NavigateToMMACSMainRadioButton_OnClick(object sender, RoutedEventArgs e)
 		{
-			_regionManager.RequestNavigate(RegionNames.MainContentRegion, MathematicalMethodsAnalysisComplexSystemsMainViewUri);
+			_regionManager.RequestNavigate(RegionNames.MainContentRegion, MMACSMainViewUri);
 		}
-
-		
 	}
 }

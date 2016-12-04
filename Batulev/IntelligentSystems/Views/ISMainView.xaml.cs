@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MathematicalMethodsAnalysisComplexSystems.Views
+namespace IntelligentSystems.Views
 {
 	/// <summary>
-	/// Interaction logic for MathematicalMethodsAnalysisComplexSystemsMainView.xaml
+	/// Interaction logic for ISMainView.xaml
 	/// </summary>
-	public partial class MathematicalMethodsAnalysisComplexSystemsMainView : UserControl
+	public partial class ISMainView : UserControl
 	{
-		public MathematicalMethodsAnalysisComplexSystemsMainView()
+		public ISMainView()
 		{
 			InitializeComponent();
 		}

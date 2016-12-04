@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FuzzyAnalysisAndModeling.Views;
 using Infrastructure;
-using IntelligentSystems.Views;
 using Microsoft.Practices.Unity;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 
-namespace IntelligentSystems
+namespace FuzzyAnalysisAndModeling
 {
-	public class ISModule : IModule
+    public class FAAMModule:IModule
 	{
 		private readonly IUnityContainer _unityContainer;
 		private readonly IRegionManager _regionManager;
 
-		public ISModule(IUnityContainer unityContainer, IRegionManager regionManager)
+		public FAAMModule(IUnityContainer unityContainer, IRegionManager regionManager)
 		{
 			_unityContainer = unityContainer;
 			_regionManager = regionManager;
@@ -25,12 +25,12 @@ namespace IntelligentSystems
 
 		public void Initialize()
 		{
-			_unityContainer.RegisterType<ISNavigationItemView>();
+			_unityContainer.RegisterType<FAAMNavigationItemView>();
 
-			_unityContainer.RegisterType<ISMainView>();
-			_unityContainer.RegisterTypeForNavigation<ISMainView>();
+			_unityContainer.RegisterType<FAAMMainView>();
+			_unityContainer.RegisterTypeForNavigation<FAAMMainView>();
 
-			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(ISNavigationItemView));
+			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion, typeof(FAAMNavigationItemView));
 		}
 	}
 }

@@ -20,7 +20,7 @@ namespace OptimizationMethods.Views
 	/// <summary>
 	/// Interaction logic for OptimizationMethodsNavigationItemView.xaml
 	/// </summary>
-	[ViewSortHint("01")]
+	[ViewSortHint("03")]
 	public partial class OptimizationMethodsNavigationItemView : NavigationItemUserControl
 	{
 		private static readonly Uri OptimizationMethodsMainViewUri = new Uri("/OptimizationMethodsMainView", UriKind.Relative);
