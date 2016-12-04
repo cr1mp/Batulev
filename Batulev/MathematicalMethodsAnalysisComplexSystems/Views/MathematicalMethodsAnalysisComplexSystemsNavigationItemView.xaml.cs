@@ -28,6 +28,10 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 		public MathematicalMethodsAnalysisComplexSystemsNavigationItemView(IRegionManager regionManager) 
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
+		}
+
+		protected override void InitializeView()
+		{
 			InitializeComponent();
 		}
 

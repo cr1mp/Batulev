@@ -28,8 +28,10 @@ namespace OptimizationMethods.Views
 		public OptimizationMethodsMainView(IRegionManager regionManager)
 			:base(regionManager, OptimizationMethodsRegionNames.LaboratoryWorkContentRegion)
 		{
-			
+		}
 
+		protected override void InitializeView()
+		{
 			InitializeComponent();
 		}
 

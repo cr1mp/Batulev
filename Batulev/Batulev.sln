@@ -21,6 +21,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathematicalMethodsAnalysisComplexSystems", "MathematicalMethodsAnalysisComplexSystems\MathematicalMethodsAnalysisComplexSystems.csproj", "{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntelligentSystems", "IntelligentSystems\IntelligentSystems.csproj", "{5DF2B7BE-6474-4A5B-8569-A931116F4E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyAnalysisAndModeling", "FuzzyAnalysisAndModeling\FuzzyAnalysisAndModeling.csproj", "{5CD684A6-938B-4C27-9787-E2216382662C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicsOfPedagogyInHigherEducation", "BasicsOfPedagogyInHigherEducation\BasicsOfPedagogyInHigherEducation.csproj", "{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +49,18 @@ Global
 		{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DF2B7BE-6474-4A5B-8569-A931116F4E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DF2B7BE-6474-4A5B-8569-A931116F4E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DF2B7BE-6474-4A5B-8569-A931116F4E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DF2B7BE-6474-4A5B-8569-A931116F4E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CD684A6-938B-4C27-9787-E2216382662C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CD684A6-938B-4C27-9787-E2216382662C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CD684A6-938B-4C27-9787-E2216382662C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CD684A6-938B-4C27-9787-E2216382662C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,5 +68,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1ADDC1F1-4A51-40F9-ACAB-A5F0D6499333} = {23100B13-AA60-4B08-9D51-76AD6C8F5104}
 		{3FB7AF9B-16C2-4DAE-B46E-3EC1E3AAD2F9} = {3BD7C45F-4241-48C8-B794-C50D6D5613B6}
+		{5DF2B7BE-6474-4A5B-8569-A931116F4E61} = {32C557BF-0A8B-40AA-A217-A72FA3A3C8A6}
+		{5CD684A6-938B-4C27-9787-E2216382662C} = {08AA981F-A6F7-4476-B868-37C2F89BEE9C}
+		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632} = {D714348C-3AE9-4851-8C84-C31D307A257D}
 	EndGlobalSection
 EndGlobal

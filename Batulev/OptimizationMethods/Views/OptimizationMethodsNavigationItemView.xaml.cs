@@ -30,6 +30,10 @@ namespace OptimizationMethods.Views
 		public OptimizationMethodsNavigationItemView(IRegionManager regionManager)
 			:base(regionManager, RegionNames.MainContentRegion)
 		{
+		}
+
+		protected override void InitializeView()
+		{
 			InitializeComponent();
 		}
 

@@ -12,12 +12,12 @@ using Prism.Unity;
 
 namespace MathematicalMethodsAnalysisComplexSystems
 {
-    public class MathematicalMethodsAnalysisComplexSystemsModule:IModule
+    public class MMACSModule:IModule
 	{
 		private readonly IUnityContainer _unityContainer;
 		private readonly IRegionManager _regionManager;
 
-		public MathematicalMethodsAnalysisComplexSystemsModule(IUnityContainer unityContainer,IRegionManager regionManager)
+		public MMACSModule(IUnityContainer unityContainer,IRegionManager regionManager)
 		{
 			_unityContainer = unityContainer;
 			_regionManager = regionManager;

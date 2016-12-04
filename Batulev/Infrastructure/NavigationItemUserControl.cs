@@ -12,16 +12,23 @@ namespace Infrastructure
 	{
 		protected readonly IRegionManager _regionManager;
 
-		public NavigationItemUserControl(IRegionManager regionManager,string regionName)
+		protected NavigationItemUserControl(IRegionManager regionManager,string regionName)
 		{
 			_regionManager = regionManager;
 
-			IRegion mainContentRegion = _regionManager.Regions[regionName];
-			if (mainContentRegion != null && mainContentRegion.NavigationService != null)
+			InitializeView();
+
+			if (regionManager.Regions.ContainsRegionWithName(regionName))
 			{
-				mainContentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
+				IRegion contentRegion = _regionManager.Regions[regionName];
+				if (contentRegion != null && contentRegion.NavigationService != null)
+				{
+					contentRegion.NavigationService.Navigated += this.MainContentRegion_Navigated;
+				}
 			}
 		}
+
+		protected abstract void InitializeView();
 
 		protected virtual void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
 		{
