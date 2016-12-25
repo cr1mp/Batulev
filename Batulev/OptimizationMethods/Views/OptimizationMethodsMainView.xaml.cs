@@ -22,15 +22,11 @@ namespace OptimizationMethods.Views
 	/// </summary>
 	public partial class OptimizationMethodsMainView : NavigationItemUserControl
 	{
-		private static Uri Lab1ViewUri = new Uri("/Labs/Lab1View", UriKind.Relative);
-		private static Uri Lab2ViewUri = new Uri("/Labs/Lab2View", UriKind.Relative);
+		private static Uri Lab1ViewUri = new Uri("/Lab1View", UriKind.Relative);
+		private static Uri Lab2ViewUri = new Uri("/Lab2View", UriKind.Relative);
 
 		public OptimizationMethodsMainView(IRegionManager regionManager)
 			:base(regionManager, OptimizationMethodsRegionNames.LaboratoryWorkContentRegion)
-		{
-		}
-
-		protected override void InitializeView()
 		{
 			InitializeComponent();
 		}

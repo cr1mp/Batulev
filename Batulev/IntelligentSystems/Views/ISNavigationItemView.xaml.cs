@@ -28,10 +28,6 @@ namespace IntelligentSystems.Views
 		public ISNavigationItemView(IRegionManager regionManager) 
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
-		}
-
-		protected override void InitializeView()
-		{
 			InitializeComponent();
 		}
 

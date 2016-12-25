@@ -25,14 +25,8 @@ namespace OptimizationMethods.Views
 	{
 		private static readonly Uri OptimizationMethodsMainViewUri = new Uri("/OptimizationMethodsMainView", UriKind.Relative);
 
-		
-
 		public OptimizationMethodsNavigationItemView(IRegionManager regionManager)
 			:base(regionManager, RegionNames.MainContentRegion)
-		{
-		}
-
-		protected override void InitializeView()
 		{
 			InitializeComponent();
 		}

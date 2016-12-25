@@ -12,11 +12,13 @@ namespace Infrastructure
 	{
 		protected readonly IRegionManager _regionManager;
 
+		protected NavigationItemUserControl()
+		{
+		}
+
 		protected NavigationItemUserControl(IRegionManager regionManager,string regionName)
 		{
 			_regionManager = regionManager;
-
-			InitializeView();
 
 			if (regionManager.Regions.ContainsRegionWithName(regionName))
 			{
@@ -27,8 +29,6 @@ namespace Infrastructure
 				}
 			}
 		}
-
-		protected abstract void InitializeView();
 
 		protected virtual void MainContentRegion_Navigated(object sender, RegionNavigationEventArgs e)
 		{

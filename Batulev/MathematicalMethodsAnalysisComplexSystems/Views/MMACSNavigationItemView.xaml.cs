@@ -28,12 +28,9 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 		public MMACSNavigationItemView(IRegionManager regionManager) 
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
-		}
-
-		protected override void InitializeView()
-		{
 			InitializeComponent();
 		}
+
 
 		protected override void UpdateNavigationButtonState(Uri uri)
 		{

@@ -28,16 +28,12 @@ namespace BasicsOfPedagogyInHigherEducation.View
 		public BOfPIENavigationItemView(IRegionManager regionManager)
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
+			InitializeComponent();
 		}
 
 		private void NavigateToBOfPIEMainViewRadioButton_OnClick(object sender, RoutedEventArgs e)
 		{
 			_regionManager.RequestNavigate(RegionNames.MainContentRegion, BOfPIEMainViewUri);
-		}
-
-		protected override void InitializeView()
-		{
-			InitializeComponent();
 		}
 
 		protected override void UpdateNavigationButtonState(Uri uri)

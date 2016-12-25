@@ -5,8 +5,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OptimizationMethods.Views.Labs"
              mc:Ignorable="d" 
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+	<Grid>
+		<controls:FlipView IsBannerEnabled="False"
+						   MouseOverGlowEnabled="False"
+						   >
+			<controls:FlipView.Items>
+				<Grid >
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<TextBlock Grid.ColumnSpan="2">1) Упростить выражение, которое пользователь вводит в виде строки.</TextBlock>
+
+					<TextBlock Grid.Row="1" Grid.Column="0">Введите выражение:</TextBlock>
+					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Job1, UpdateSourceTrigger=PropertyChanged }"/>
+
+					<TextBlock Grid.Row="2" Grid.Column="0">Результат</TextBlock>
+					<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Result1}"/>
+				</Grid>
+				<Grid Background="#00A600"></Grid>
+			</controls:FlipView.Items>
+		</controls:FlipView>
+	</Grid>
 </UserControl>

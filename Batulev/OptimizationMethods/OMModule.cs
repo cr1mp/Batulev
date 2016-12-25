@@ -10,6 +10,7 @@ using OptimizationMethods.Views.Labs;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
+using Wolfram.NETLink;
 
 namespace OptimizationMethods
 {
@@ -26,6 +27,12 @@ namespace OptimizationMethods
 
 		public void Initialize()
 		{
+			var kernel = MathLinkFactory.CreateKernelLink();
+			_unityContainer.RegisterInstance<IKernelLink>(kernel);
+
+			var mathKernel = new Wolfram.NETLink.MathKernel(kernel);
+			_unityContainer.RegisterInstance(mathKernel);
+
 			_unityContainer.RegisterType<OptimizationMethodsNavigationItemView>();
 
 			_unityContainer.RegisterType<OptimizationMethodsMainView>();

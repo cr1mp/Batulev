@@ -10,9 +10,9 @@
 		GlowBrush="{DynamicResource AccentColorBrush}">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" MinWidth="50"/>
 			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition/>
+			<ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 		<ItemsControl prism:RegionManager.RegionName="MainNavigationRegion"></ItemsControl>
 		<GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>

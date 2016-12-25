@@ -28,16 +28,12 @@ namespace FuzzyAnalysisAndModeling.Views
 		public FAAMNavigationItemView(IRegionManager regionManager)
 			: base(regionManager, RegionNames.MainContentRegion)
 		{
+			InitializeComponent();
 		}
 
 		private void NavigateToFAAMMainViewRadioButton_OnClick(object sender, RoutedEventArgs e)
 		{
 			_regionManager.RequestNavigate(RegionNames.MainContentRegion, FAAMMainViewUri);
-		}
-
-		protected override void InitializeView()
-		{
-			InitializeComponent();
 		}
 
 		protected override void UpdateNavigationButtonState(Uri uri)
