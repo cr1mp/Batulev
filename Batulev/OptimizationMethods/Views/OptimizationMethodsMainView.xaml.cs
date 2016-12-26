@@ -26,7 +26,7 @@ namespace OptimizationMethods.Views
 		private static Uri Lab2ViewUri = new Uri("/Lab2View", UriKind.Relative);
 
 		public OptimizationMethodsMainView(IRegionManager regionManager)
-			:base(regionManager, OptimizationMethodsRegionNames.LaboratoryWorkContentRegion)
+			:base(regionManager, RegionNames.MainContentRegion)
 		{
 			InitializeComponent();
 		}
@@ -39,12 +39,12 @@ namespace OptimizationMethods.Views
 
 		private void Lab1_OnClick(object sender, RoutedEventArgs e)
 		{
-			_regionManager.RequestNavigate(OptimizationMethodsRegionNames.LaboratoryWorkContentRegion, Lab1ViewUri);
+			_regionManager.RequestNavigate(RegionNames.MainContentRegion, Lab1ViewUri);
 		}
 
 		private void Lab2_OnClick(object sender, RoutedEventArgs e)
 		{
-			_regionManager.RequestNavigate(OptimizationMethodsRegionNames.LaboratoryWorkContentRegion, Lab2ViewUri);
+			_regionManager.RequestNavigate(RegionNames.MainContentRegion, Lab2ViewUri);
 
 		}
 

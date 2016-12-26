@@ -9,17 +9,8 @@
 			 prism:ViewModelLocator.AutoWireViewModel="True"
 			 mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" MinWidth="50"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<ItemsControl prism:RegionManager.RegionName="LaboratoryWorkNavigationRegion">
-			<ToggleButton x:Name="Lab1" Click="Lab1_OnClick">Лабораторная работа №1</ToggleButton>
-			<ToggleButton x:Name="Lab2" Click="Lab2_OnClick">Лабораторная работа №2</ToggleButton>
-		</ItemsControl>
-		<GridSplitter Grid.Column="1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Center"/>
-		<ContentControl Grid.Column="2" prism:RegionManager.RegionName="LaboratoryWorkContentRegion" />
-	</Grid>
+	<ItemsControl>
+		<ToggleButton x:Name="Lab1" Click="Lab1_OnClick">Лабораторная работа №1</ToggleButton>
+		<ToggleButton x:Name="Lab2" Click="Lab2_OnClick">Лабораторная работа №2</ToggleButton>
+	</ItemsControl>
 </we:NavigationItemUserControl>

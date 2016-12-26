@@ -30,7 +30,8 @@ namespace OptimizationMethods
 			var kernel = MathLinkFactory.CreateKernelLink();
 			_unityContainer.RegisterInstance<IKernelLink>(kernel);
 
-			var mathKernel = new Wolfram.NETLink.MathKernel(kernel);
+			var mathKernel = new MathKernel(kernel);
+			mathKernel.CaptureGraphics = true;
 			_unityContainer.RegisterInstance(mathKernel);
 
 			_unityContainer.RegisterType<OptimizationMethodsNavigationItemView>();

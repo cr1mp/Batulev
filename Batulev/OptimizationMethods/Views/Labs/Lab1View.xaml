@@ -7,31 +7,174 @@
              mc:Ignorable="d" 
 			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              d:DesignHeight="300" d:DesignWidth="300">
-	<Grid>
-		<controls:FlipView IsBannerEnabled="False"
-						   MouseOverGlowEnabled="False"
-						   >
-			<controls:FlipView.Items>
-				<Grid >
+	
+	<UserControl.Resources>
+		<Style x:Key="ListContainerStyle" TargetType="ListBoxItem" >
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+		<DataTemplate x:Key="ListTemplate">
+			<Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition/>
+						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<TextBlock Grid.ColumnSpan="2">1) Упростить выражение, которое пользователь вводит в виде строки.</TextBlock>
 
-					<TextBlock Grid.Row="1" Grid.Column="0">Введите выражение:</TextBlock>
-					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Job1, UpdateSourceTrigger=PropertyChanged }"/>
-
-					<TextBlock Grid.Row="2" Grid.Column="0">Результат</TextBlock>
-					<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Result1}"/>
+					<TextBlock Text="{Binding Name}" Grid.Row="0"/>
+					<TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged }" Grid.Row="0" Grid.Column="1"/>
+					
 				</Grid>
-				<Grid Background="#00A600"></Grid>
-			</controls:FlipView.Items>
-		</controls:FlipView>
-	</Grid>
+			</Border>
+		</DataTemplate>
+	</UserControl.Resources>
+	
+	<controls:FlipView IsBannerEnabled="False"
+						   MouseOverGlowEnabled="False"
+						   >
+		<controls:FlipView.Items>
+			<Grid DataContext="{Binding Job1}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<TextBlock Grid.ColumnSpan="2" TextWrapping="Wrap">1) Упростить выражение, которое пользователь вводит в виде строки.</TextBlock>
+
+				<TextBlock Grid.Row="1" Grid.Column="0">Введите выражение:</TextBlock>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding In1, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="2" Grid.Column="0">Результат упрощения: </TextBlock>
+				<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Result1}" Margin="10,0,0,0"/>
+
+				<TextBlock Grid.Row="3" Grid.Column="0">Результат:</TextBlock>
+				<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Result2}" Margin="10,0,0,0"/>
+				
+				<ListBox Grid.Row="4"
+						 Grid.Column="0"
+						 Grid.ColumnSpan="2"
+						 ItemsSource="{Binding Unknown}"
+						 ItemTemplate="{StaticResource ListTemplate}"
+						 ItemContainerStyle="{StaticResource ListContainerStyle}"/>
+			</Grid>
+			
+			<Grid DataContext="{Binding Job2}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">2) Построить график функции ошибок Erf на диапазоне заданном пользователем. График сохранить на жесткий диск в виде файла .bmp. Найти значения функции ошибок в заданных пользователем точках.</TextBlock>
+
+				<TextBlock Grid.Row="1" Grid.Column="0">Введите x min:</TextBlock>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding xMin, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="2" Grid.Column="0">Введите x max:</TextBlock>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding xMax, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<Image 
+					   Grid.ColumnSpan="2"
+					   Grid.Row="3"
+					   Source="{Binding Img}"/>
+				
+				<Button 
+					   Grid.ColumnSpan="2"
+					   Grid.Row="4"
+					   Content="Сохранить"
+					   Command="{Binding SaveCommand}"
+					/>
+
+				<TextBlock Grid.Row="5" Grid.Column="0">x:</TextBlock>
+				<TextBox Grid.Row="5" Grid.Column="1" Text="{Binding X1, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="6" Grid.Column="0">Значения функции ошибок:</TextBlock>
+				<TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Result}"/>
+			</Grid>
+			
+			<Grid DataContext="{Binding Job3}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">3) Построить график функции на диапазоне заданном пользователем. Функция вводится в виде строки. График сохранить на жесткий диск как файл .bmp.</TextBlock>
+
+				<TextBlock Grid.Row="1" Grid.Column="0">Введите x min:</TextBlock>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding xMin, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="2" Grid.Column="0">Введите x max:</TextBlock>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding xMax, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="3" Grid.Column="0" TextWrapping="Wrap">Введите функцию для построения графика:</TextBlock>
+				<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding GraphicFunc, UpdateSourceTrigger=PropertyChanged }"/>
+				
+				<Image 
+					   Grid.ColumnSpan="2"
+					   Grid.Row="4"
+					   Source="{Binding Img}"/>
+
+				<Button 
+					   Grid.ColumnSpan="2"
+					   Grid.Row="5"
+					   Content="Сохранить"
+					   Command="{Binding SaveCommand}"
+					/>
+				
+			</Grid>
+			
+			<Grid DataContext="{Binding Job4}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					4) Найти решение системы уравнений
+				</TextBlock>
+
+				<TextBlock Grid.Row="1" Grid.Column="0">Введите a:</TextBlock>
+				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding A, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="2" Grid.Column="0">Введите b:</TextBlock>
+				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding B, UpdateSourceTrigger=PropertyChanged }"/>
+
+				<TextBlock Grid.Row="3" Grid.Column="0">Ответ</TextBlock>
+				<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Result}"/>
+			</Grid>
+			
+			<Grid Background="#00A600"></Grid>
+		</controls:FlipView.Items>
+	</controls:FlipView>
 </UserControl>
