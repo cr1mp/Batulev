@@ -11,8 +11,8 @@ namespace OptimizationMethods.ViewModels.Lab1
 	{
 		private string _graphicFunc;
 
-		public Job3(IKernelLink kernelLink, MathKernel mathKernel) 
-			: base(kernelLink, mathKernel)
+		public Job3( MathKernel mathKernel) 
+			: base( mathKernel)
 		{
 		}
 
@@ -26,9 +26,9 @@ namespace OptimizationMethods.ViewModels.Lab1
 			}
 		}
 
-		protected override string GetFunc()
+		protected override string GetGraphicFunc()
 		{
-			return $"Plot[{GraphicFunc}, {{x, {_xMin}, {_xMax}}}, PlotRange -> Full]";
+			return GraphicFunc;
 		}
 	}
 }

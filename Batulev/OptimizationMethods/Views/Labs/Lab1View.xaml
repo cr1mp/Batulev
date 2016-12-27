@@ -9,6 +9,12 @@
              d:DesignHeight="300" d:DesignWidth="300">
 	
 	<UserControl.Resources>
+		<Style x:Key="ResultStyle" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="Consolas"/>
+			<Setter Property="FontSize" Value="12"/>
+			<Setter Property="Margin" Value="10,0,0,0"/>
+		</Style>
+		
 		<Style x:Key="ListContainerStyle" TargetType="ListBoxItem" >
 			<Setter Property="Padding" Value="0"/>
 			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -50,11 +56,19 @@
 				<TextBlock Grid.Row="1" Grid.Column="0">Введите выражение:</TextBlock>
 				<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding In1, UpdateSourceTrigger=PropertyChanged }"/>
 
-				<TextBlock Grid.Row="2" Grid.Column="0">Результат упрощения: </TextBlock>
-				<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Result1}" Margin="10,0,0,0"/>
-
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">Результат упрощения: </TextBlock>
+				<TextBlock Grid.Row="2"
+						   Grid.Column="1"
+						   Text="{Binding Result1}"
+						   Style="{StaticResource ResourceKey=ResultStyle}"/>
+				
+				
 				<TextBlock Grid.Row="3" Grid.Column="0">Результат:</TextBlock>
-				<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Result2}" Margin="10,0,0,0"/>
+				<TextBlock Grid.Row="3"
+						   Grid.Column="1"
+						   Text="{Binding Result2}"
+						   Style="{StaticResource ResourceKey=ResultStyle}"/>
 				
 				<ListBox Grid.Row="4"
 						 Grid.Column="0"
@@ -161,7 +175,7 @@
 
 				<TextBlock Grid.ColumnSpan="2"
 						   TextWrapping="Wrap">
-					4) Найти решение системы уравнений
+					4) Найти решение системы уравнений ax+y=7 и bx-y=1
 				</TextBlock>
 
 				<TextBlock Grid.Row="1" Grid.Column="0">Введите a:</TextBlock>
@@ -171,10 +185,374 @@
 				<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding B, UpdateSourceTrigger=PropertyChanged }"/>
 
 				<TextBlock Grid.Row="3" Grid.Column="0">Ответ</TextBlock>
-				<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Result}"/>
+				<TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Result}"
+						   Style="{StaticResource ResourceKey=ResultStyle}"/>
 			</Grid>
 			
-			<Grid Background="#00A600"></Grid>
+			<Grid DataContext="{Binding Job5}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					5) Задано уравнение с параметром a: 3x^2-2x-a=0. Диапазон и шаг дискретного изменения параметра задаются пользователем. Необходимо найти максимальное и минимальное решение уравнения при таком изменении a.
+				</TextBlock>
+				
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">aMin</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding aMin, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">aMax</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding aMax, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Шаг</TextBlock>
+				<TextBox Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Step, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="4"
+						   Grid.Column="0">Максимальное решение</TextBlock>
+				<TextBlock Grid.Row="4"
+						 Grid.Column="1"
+						 Text="{Binding MaxResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<TextBlock Grid.Row="5"
+						   Grid.Column="0">Минимальное решение</TextBlock>
+				<TextBlock Grid.Row="5"
+						 Grid.Column="1"
+						 Text="{Binding MinResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+			</Grid>
+			
+			<Grid DataContext="{Binding Job6}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					6) Найти решения уравнения x^2+a*x+b=0 при значениях параметров a и b вводимых с клавиатуры.
+				</TextBlock>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">a</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding A, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">b</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding B, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Решения</TextBlock>
+				<TextBlock Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Result}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+			</Grid>
+
+			<Grid DataContext="{Binding Job7}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					7) Найти максимальное и минимальное значение функции y=3*x^3-2*x^2+7 при дискретном изменении х. Диапазон и шаг изменения вводится пользователем. Построить график функции на заданном диапазоне и сохранить его на диск в виде .bmp файла.
+				</TextBlock>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">xMin</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding xMin, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">xMax</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding xMax, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Step</TextBlock>
+				<TextBox Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Step, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="4"
+						   Grid.Column="0">Максимальное значение функции</TextBlock>
+				<TextBlock Grid.Row="4"
+						 Grid.Column="1"
+						 Text="{Binding MaxResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<TextBlock Grid.Row="5"
+						   Grid.Column="0">Минимальное значение функции</TextBlock>
+				<TextBlock Grid.Row="5"
+						 Grid.Column="1"
+						 Text="{Binding MinResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<Image Grid.Row="6"
+					   Grid.Column="0"
+					   Grid.ColumnSpan="2"
+					   Source="{Binding Img}"/>
+
+				<Button Grid.Row="7"
+						Grid.Column="0"
+						Grid.ColumnSpan="2"
+						Content="Сохранить"
+						Command="{Binding SaveCommand}"
+					/>
+				
+			</Grid>
+
+			<Grid DataContext="{Binding Job8}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					8) Решить задачу линейного программирования: 
+Для изготовления трех видов изделий А, В и С используется токарное, фрезерное, сварочное и шлифовальное оборудование. Затраты времени на обработку одного изделия для каждого из типов оборудования указаны в таблице 1. В ней же указан общий фонд рабочего времени каждого из типов используемого оборудования, а также прибыль от реализации одного изделия каждого вида. Требуется определить, сколько изделий и какого вида следует изготовить предприятию, чтобы прибыль от их реализации была максимальной.
+				</TextBlock>
+				
+				<Button Grid.Row="1"
+						   Grid.Column="0"
+						   Content="Ответ"
+						   Command="{Binding EvaluateCommand}"/>
+				<TextBlock Grid.Row="1"
+						   Grid.Column="1"
+						   Style="{StaticResource ResourceKey=ResultStyle}"
+						   Text="{Binding Result}"/>
+			</Grid>
+			
+			<Grid DataContext="{Binding Job9}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					9) Найти решения уравнения b*x2+a*x+b=0 при значениях параметров a и b вводимых с клавиатуры.
+				</TextBlock>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">a</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding A, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">b</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding B, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Минимальное значение функции</TextBlock>
+				<TextBlock Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Result}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+			</Grid>
+			
+			<Grid DataContext="{Binding Job10}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					10) Задано уравнение с параметром a: sqrt(a*x^2+11)=a . Диапазон и шаг дискретного изменения параметра задаются пользователем. Необходимо найти максимальное и минимальное решение уравнения при таком изменении a.
+				</TextBlock>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">aMin</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding aMin, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">aMax</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding aMax, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Шаг</TextBlock>
+				<TextBox Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Step, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="4"
+						   Grid.Column="0">Максимальное решение</TextBlock>
+				<TextBlock Grid.Row="4"
+						 Grid.Column="1"
+						 Text="{Binding MaxResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<TextBlock Grid.Row="5"
+						   Grid.Column="0">Минимальное решение</TextBlock>
+				<TextBlock Grid.Row="5"
+						 Grid.Column="1"
+						 Text="{Binding MinResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+			</Grid>
+			
+			<Grid DataContext="{Binding Job11}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Grid.Column="0"
+						   Grid.ColumnSpan="2"
+						   TextWrapping="Wrap">
+					11) Найти максимальное и минимальное значение функции y=sqrt(5*x^2-x)  при дискретном изменении х. Диапазон и шаг изменения вводится пользователем. Построить график функции на заданном диапазоне и сохранить его на диск в виде .bmp файла.
+				</TextBlock>
+
+				<TextBlock Grid.Row="1"
+						   Grid.Column="0">xMin</TextBlock>
+				<TextBox Grid.Row="1"
+						 Grid.Column="1"
+						 Text="{Binding xMin, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="2"
+						   Grid.Column="0">xMax</TextBlock>
+				<TextBox Grid.Row="2"
+						 Grid.Column="1"
+						 Text="{Binding xMax, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="3"
+						   Grid.Column="0">Step</TextBlock>
+				<TextBox Grid.Row="3"
+						 Grid.Column="1"
+						 Text="{Binding Step, UpdateSourceTrigger=PropertyChanged}"/>
+
+				<TextBlock Grid.Row="4"
+						   Grid.Column="0">Максимальное значение функции</TextBlock>
+				<TextBlock Grid.Row="4"
+						 Grid.Column="1"
+						 Text="{Binding MaxResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<TextBlock Grid.Row="5"
+						   Grid.Column="0">Минимальное значение функции</TextBlock>
+				<TextBlock Grid.Row="5"
+						 Grid.Column="1"
+						 Text="{Binding MinResult}"
+						 Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+				<Image Grid.Row="6"
+					   Grid.Column="0"
+					   Grid.ColumnSpan="2"
+					   Source="{Binding Img}"/>
+
+				<Button Grid.Row="7"
+						Grid.Column="0"
+						Grid.ColumnSpan="2"
+						Content="Сохранить"
+						Command="{Binding SaveCommand}"
+					/>
+			</Grid>
+
 		</controls:FlipView.Items>
 	</controls:FlipView>
+
 </UserControl>

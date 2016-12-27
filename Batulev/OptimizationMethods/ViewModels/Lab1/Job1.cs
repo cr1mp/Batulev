@@ -8,19 +8,15 @@ using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
 {
-	public class Job1 : BindableBase
+	public class Job1 : BaseJob
 	{
-		private readonly IKernelLink _kernelLink;
-		private readonly MathKernel _mathKernel;
 
 		private string _in1;
 		private string _job2;
 
-		public Job1(IKernelLink kernelLink, MathKernel mathKernel)
+		public Job1( MathKernel mathKernel)
+			:base(mathKernel)
 		{
-			_kernelLink = kernelLink;
-			_mathKernel = mathKernel;
-
 			Unknown = new ObservableCollection<Point>();
 
 		}
@@ -69,20 +65,7 @@ namespace OptimizationMethods.ViewModels.Lab1
 
 		private string Simplify(string input)
 		{
-			if (!string.IsNullOrWhiteSpace(input))
-			{
-				if (_mathKernel.IsComputing)
-				{
-					_mathKernel.Abort();
-				}
-				else
-				{
-					_mathKernel.Compute($"Simplify[{input}]");
-
-					return (string)_mathKernel.Result;
-				}
-			}
-			return string.Empty;
+			return Compute($"Simplify[{input}]");
 		}
 
 		private string[] GetUnknownVariables(string out1)
