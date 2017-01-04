@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using OptimizationMethods.ViewModels.Lab2;
 
 namespace OptimizationMethods.Views.Labs
 {
@@ -20,9 +21,10 @@ namespace OptimizationMethods.Views.Labs
 	/// </summary>
 	public partial class Lab2View : UserControl
 	{
-		public Lab2View()
+		public Lab2View(Lab2ViewModel model)
 		{
 			InitializeComponent();
+			this.DataContext = model;
 		}
 	}
 }

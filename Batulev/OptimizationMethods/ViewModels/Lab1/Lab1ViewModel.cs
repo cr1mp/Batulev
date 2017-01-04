@@ -1,13 +1,7 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using OptimizationMethods.ViewModels.Lab1;
-using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Wolfram.NETLink;
 
-namespace OptimizationMethods.ViewModels
+namespace OptimizationMethods.ViewModels.Lab1
 {
 	public class Lab1ViewModel : BindableBase
 	{

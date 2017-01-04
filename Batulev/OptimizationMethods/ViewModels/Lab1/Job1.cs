@@ -68,22 +68,7 @@ namespace OptimizationMethods.ViewModels.Lab1
 			return Compute($"Simplify[{input}]");
 		}
 
-		private string[] GetUnknownVariables(string out1)
-		{
-			List<string> result = new List<string>();
-			var arr = out1.Split(' ', '+', '-', '*', '/', '(', ')', '^', '=');
-			foreach (var item in arr)
-			{
-				if (!string.IsNullOrWhiteSpace(item))
-				{
-					double tmp;
-					if (!double.TryParse(item, out tmp))
-						result.Add(item);
-				}
-			}
-			return result.Distinct().ToArray();
-
-		}
+		
 	}
 
 	public class Point : BindableBase

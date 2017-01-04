@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Prism.Mvvm;
 using Wolfram.NETLink;
 
-namespace OptimizationMethods.ViewModels.Lab1
+namespace OptimizationMethods.ViewModels
 {
 	public abstract class BaseJob : BindableBase
 	{
@@ -40,6 +38,22 @@ namespace OptimizationMethods.ViewModels.Lab1
 				}
 			}
 			return string.Empty;
+		}
+
+		protected string[] GetUnknownVariables(string out1)
+		{
+			List<string> result = new List<string>();
+			var arr = out1.Split(' ', '+', '-', '*', '/', '(', ')', '^', '=');
+			foreach (var item in arr)
+			{
+				if (!string.IsNullOrWhiteSpace(item))
+				{
+					double tmp;
+					if (!double.TryParse(item, out tmp))
+						result.Add(item);
+				}
+			}
+			return result.Distinct().ToArray();
 		}
 	}
 }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OptimizationMethods.ViewModels;
+using OptimizationMethods.ViewModels.Lab1;
 
 namespace OptimizationMethods.Views.Labs
 {

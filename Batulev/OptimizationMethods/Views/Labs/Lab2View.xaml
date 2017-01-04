@@ -5,8 +5,205 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OptimizationMethods.Views.Labs"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="AntiqueWhite">
-    <Grid>
-            
-    </Grid>
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             d:DesignHeight="300" d:DesignWidth="300" >
+	<UserControl.Resources>
+		<Style x:Key="ResultStyle" TargetType="TextBlock">
+			<Setter Property="FontFamily" Value="Consolas"/>
+			<Setter Property="FontSize" Value="12"/>
+			<Setter Property="Margin" Value="10,0,0,0"/>
+		</Style>
+
+		<Style x:Key="ListContainerStyle" TargetType="ListBoxItem" >
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+		<DataTemplate x:Key="ListTemplate">
+			<Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.Column="0"
+							   Text="{Binding Coefficient}"/>
+					<TextBlock Grid.Column="1">Мин</TextBlock>
+					<TextBox Grid.Column="2"
+							 Text="{Binding Min, UpdateSourceTrigger=PropertyChanged }" />
+					<TextBlock Grid.Column="3">Макс</TextBlock>
+					<TextBox Grid.Column="4"
+							 Text="{Binding Max, UpdateSourceTrigger=PropertyChanged }" />
+
+					<Button Grid.Column="5"
+							Content="Удалить"
+							Command="{Binding Remove}"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+		<Style x:Key="RestrictionsListContainerStyle" TargetType="ListBoxItem" >
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+		</Style>
+		<DataTemplate x:Key="RestrictionsListTemplate">
+			<Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+
+
+					<TextBlock Grid.Column="1">Ограничение</TextBlock>
+					<TextBox Grid.Column="2"
+							 Text="{Binding Value, UpdateSourceTrigger=PropertyChanged }" />
+					
+
+					<Button Grid.Column="5"
+							Content="Удалить"
+							Command="{Binding Remove}"/>
+				</Grid>
+			</Border>
+		</DataTemplate>
+	</UserControl.Resources>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0"
+				   Grid.Column="0"
+				   Text="k1*x1+k2*x2"/>
+		<TextBlock Grid.Row="0"
+				   Grid.Column="1"
+				   >
+			x1+x2 &lt;= 20<LineBreak/>
+			4*x1+2*x2 &lt;= 80<LineBreak/>
+			x1+5*x2 &lt;= 140<LineBreak/>
+			x1 &gt;= 0<LineBreak/>
+			x2 &gt;= 0<LineBreak/>
+		</TextBlock>
+		
+
+		<TextBlock Grid.Row="1"
+				   Grid.Column="0"
+				   Text="k1 от 120 до 330"/>
+		<TextBlock Grid.Row="1"
+				   Grid.Column="1"
+				   Margin="30,0,0,0"
+				   Text="k2 от 100 до 200"/>
+
+		<TextBlock Grid.Row="2"
+				   Grid.Column="0"
+				   Text="Результат"/>
+		<TextBlock Grid.Row="2"
+				   Grid.Column="1"
+				   Text="{Binding Result}"
+				   Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+		<TextBlock Grid.Row="3"
+				   Grid.Column="0"
+				   Text="Значения"/>
+		<TextBlock Grid.Row="3"
+				   Grid.Column="1"
+				   Text="{Binding ResultF}"
+				   Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+		<TextBlock Grid.Row="4"
+				   Grid.Column="0"
+				   Text="k1"/>
+		<TextBlock Grid.Row="4"
+				   Grid.Column="1"
+				   Text="{Binding K1}"
+				   Style="{StaticResource ResourceKey=ResultStyle}"/>
+
+		<TextBlock Grid.Row="5"
+				   Grid.Column="0"
+				   Text="k2"/>
+		<TextBlock Grid.Row="5"
+				   Grid.Column="1"
+				   Text="{Binding K2}"
+				   Style="{StaticResource ResourceKey=ResultStyle}"/>
+		
+		<Grid Grid.Row="6"
+			  Grid.Column="0"
+			  Grid.ColumnSpan="2"
+			  DataContext="{Binding Job}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Text="Введите целевую функцию"/>
+			<TextBox Grid.Row="0"
+					 Grid.Column="1"
+					 Text="{Binding Function,UpdateSourceTrigger=PropertyChanged}"/>
+
+			<ListBox Grid.Row="1"
+					 Grid.Column="0"
+					 Grid.ColumnSpan="2"
+					 ItemsSource="{Binding Range}"
+					 ItemTemplate="{StaticResource ListTemplate}"
+					 ItemContainerStyle="{StaticResource ListContainerStyle}"/>
+
+			<ListBox Grid.Row="2"
+					 Grid.Column="0"
+					 Grid.ColumnSpan="2"
+					 ItemsSource="{Binding Restrictions}"
+					 ItemTemplate="{StaticResource RestrictionsListTemplate}"
+					 ItemContainerStyle="{StaticResource RestrictionsListContainerStyle}"/>
+
+			<Button Grid.Row="3"
+					Grid.Column="1"
+					Content="Добавить ограничение"
+					Command="{Binding Add}"/>
+
+			<controls:ToggleSwitch Grid.Row="4"
+								   Grid.Column="0"
+								   Grid.ColumnSpan="2"
+								   Header="Функция"
+								   OnLabel="Max"
+								   OffLabel="Min" 
+								   IsChecked="{Binding MinMax}"/>
+			
+			<TextBlock Grid.Row="5"
+					   Grid.Column="0"
+					   Text="Результат"/>
+			<TextBlock Grid.Row="5"
+					   Grid.Column="1"
+					   Text="{Binding Result}"/>
+			
+		</Grid>
+			
+	</Grid>
 </UserControl>
