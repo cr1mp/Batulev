@@ -27,21 +27,17 @@
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 					<TextBlock Grid.Column="0"
-							   Text="{Binding Coefficient}"/>
+							   Text="{Binding Coefficient}"
+							   Margin="0,0,10,0"/>
 					<TextBlock Grid.Column="1">Мин</TextBlock>
 					<TextBox Grid.Column="2"
 							 Text="{Binding Min, UpdateSourceTrigger=PropertyChanged }" />
 					<TextBlock Grid.Column="3">Макс</TextBlock>
 					<TextBox Grid.Column="4"
 							 Text="{Binding Max, UpdateSourceTrigger=PropertyChanged }" />
-
-					<Button Grid.Column="5"
-							Content="Удалить"
-							Command="{Binding Remove}"/>
 				</Grid>
 			</Border>
 		</DataTemplate>
@@ -55,20 +51,17 @@
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*"/>
-						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="*"/>
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 
-					<TextBlock Grid.Column="1">Ограничение</TextBlock>
-					<TextBox Grid.Column="2"
+					<TextBlock Grid.Column="0">Ограничение</TextBlock>
+					<TextBox Grid.Column="1"
 							 Text="{Binding Value, UpdateSourceTrigger=PropertyChanged }" />
 					
 
-					<Button Grid.Column="5"
+					<Button Grid.Column="2"
 							Content="Удалить"
 							Command="{Binding Remove}"/>
 				</Grid>
@@ -160,6 +153,9 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 
 			<TextBlock Grid.Row="0"
@@ -186,7 +182,7 @@
 			<Button Grid.Row="3"
 					Grid.Column="1"
 					Content="Добавить ограничение"
-					Command="{Binding Add}"/>
+					Command="{Binding AddCommand}"/>
 
 			<controls:ToggleSwitch Grid.Row="4"
 								   Grid.Column="0"
@@ -202,6 +198,27 @@
 			<TextBlock Grid.Row="5"
 					   Grid.Column="1"
 					   Text="{Binding Result}"/>
+
+			<TextBlock Grid.Row="6"
+					   Grid.Column="0"
+					   Text="Значения"/>
+			<TextBlock Grid.Row="6"
+					   Grid.Column="1"
+					   Text="{Binding ResultF}"/>
+
+			<TextBlock Grid.Row="7"
+					   Grid.Column="0"
+					   Text="Коэффициенты "/>
+			<TextBlock Grid.Row="7"
+					   Grid.Column="1"
+					   Text="{Binding Ks}"/>
+
+
+			<ScrollViewer Grid.Row="8"
+						  Grid.Column="0"
+						  Grid.ColumnSpan="2">
+				<TextBlock Text="{Binding AllK}"/>
+			</ScrollViewer>
 			
 		</Grid>
 			

@@ -105,6 +105,12 @@
     <Compile Include="ViewModels\Lab1\Lab1ViewModel.cs" />
     <Compile Include="ViewModels\Lab2\Job.cs" />
     <Compile Include="ViewModels\Lab2\Lab2ViewModel.cs" />
+    <Compile Include="ViewModels\Lab2\Range.cs" />
+    <Compile Include="ViewModels\Lab2\RangeEnumerator.cs" />
+    <Compile Include="ViewModels\Lab2\RangeItem.cs" />
+    <Compile Include="ViewModels\Lab2\RangeManager.cs" />
+    <Compile Include="ViewModels\Lab2\RemovedItem.cs" />
+    <Compile Include="ViewModels\Lab2\Restriction.cs" />
     <Compile Include="ViewModels\Lab2\ResultType.cs" />
     <Compile Include="Views\Labs\Lab1View.xaml.cs">
       <DependentUpon>Lab1View.xaml</DependentUpon>

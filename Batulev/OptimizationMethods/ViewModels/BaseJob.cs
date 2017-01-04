@@ -43,7 +43,7 @@ namespace OptimizationMethods.ViewModels
 		protected string[] GetUnknownVariables(string out1)
 		{
 			List<string> result = new List<string>();
-			var arr = out1.Split(' ', '+', '-', '*', '/', '(', ')', '^', '=');
+			var arr = out1.Split(' ', '+', '-', '*', '/', '(', ')', '^', '=','<','>');
 			foreach (var item in arr)
 			{
 				if (!string.IsNullOrWhiteSpace(item))

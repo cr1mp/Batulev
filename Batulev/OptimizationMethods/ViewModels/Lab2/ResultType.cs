@@ -12,5 +12,7 @@
 
 		public int k1 { get; set; }
 		public int k2 { get; set; }
+
+		public string ks { get; set; }
 	}
 }
