@@ -36,16 +36,13 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 			return crispResult;
 		}
 
-		double Defuzzify(Func<double,double> mf, double min, double max)
+		private double Defuzzify(Func<double, double> mf, double min, double max)
 		{
 			if (_defuzzMethod == DefuzzificationMethod.Centroid)
 			{
 				int k = 50;
 				double step = (max - min) / k;
 
-				//
-				// Calculate a center of gravity as integral
-				//
 				double ptLeft = 0.0;
 				double ptCenter = 0.0;
 				double ptRight = 0.0;

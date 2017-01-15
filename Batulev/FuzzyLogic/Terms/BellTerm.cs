@@ -4,7 +4,6 @@ namespace FuzzyLogic.Terms
 {
 	public class BellTerm : Term
 	{
-
 		public BellTerm(string name)
 			: base(name)
 		{
@@ -22,7 +21,6 @@ namespace FuzzyLogic.Terms
 		public double b { get; set; }
 		public double c { get; set; }
 
-		public override double GetValue(double x) => 1 / (1 + (Math.Pow((Math.Abs((x-c)/a)), 2 * b)));
-
+		public override double GetValue(double x) => 1 / (1 + (Math.Pow((Math.Abs((x - c) / a)), 2 * b)));
 	}
 }

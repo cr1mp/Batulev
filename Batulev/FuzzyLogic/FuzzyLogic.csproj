@@ -65,19 +65,15 @@
     <Compile Include="FuzzySystem\Mamdani\ImplicateResult.cs" />
     <Compile Include="FuzzySystem\Mamdani\Rules\MamdaniFuzzyRule.cs" />
     <Compile Include="FuzzySystem\Mamdani\MamdaniFuzzySystem.cs" />
-    <Compile Include="Defuzzifier\Defuzzifier.cs" />
     <Compile Include="LinguisticVariables\InputLinguisticVariable.cs" />
     <Compile Include="LinguisticVariables\LinguisticVariable.cs" />
     <Compile Include="LinguisticVariables\OutputLinguisticVariable.cs" />
     <Compile Include="LinguisticVariables\Range.cs" />
-    <Compile Include="Norm\Norm.cs" />
-    <Compile Include="Norm\SNorm.cs" />
-    <Compile Include="Norm\TNorm.cs" />
-    <Compile Include="Terms\BellTerm.cs" />
-    <Compile Include="Terms\Term.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Terms\BellTerm.cs" />
     <Compile Include="Terms\GaussTerm.cs" />
     <Compile Include="Terms\PiTerm.cs" />
+    <Compile Include="Terms\Term.cs" />
     <Compile Include="Terms\TrianTerm.cs" />
   </ItemGroup>
   <ItemGroup />

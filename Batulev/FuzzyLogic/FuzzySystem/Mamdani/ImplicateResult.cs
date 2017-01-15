@@ -21,14 +21,14 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 		/// Аккумулирование заключений
 		/// </summary>
 		/// <returns></returns>
-		public AggregateResult Aggregate(AggregationMethod aggregationMethod,OutputLinguisticVariable[] output)
+		public AggregateResult Aggregate(AggregationMethod aggregationMethod, OutputLinguisticVariable[] output)
 		{
 			_aggregationMethod = aggregationMethod;
 			_output = output;
 			return new AggregateResult(Aggregate(_dictionary));
 		}
 
-		public Dictionary<OutputLinguisticVariable, Func<double,double>> Aggregate(Dictionary<MamdaniFuzzyRule, Func<double, double>> conclusions)
+		public Dictionary<OutputLinguisticVariable, Func<double, double>> Aggregate(Dictionary<MamdaniFuzzyRule, Func<double, double>> conclusions)
 		{
 			var fuzzyResult = new Dictionary<OutputLinguisticVariable, Func<double, double>>();
 			foreach (var variable in _output)
@@ -48,9 +48,11 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 					case AggregationMethod.Max:
 						composType = MfCompositionType.Max;
 						break;
+
 					case AggregationMethod.Sum:
 						composType = MfCompositionType.Sum;
 						break;
+
 					default:
 						throw new Exception("Internal exception.");
 				}

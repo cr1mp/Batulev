@@ -32,7 +32,7 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 
 			var result = new Dictionary<MamdaniFuzzyRule, double>();
 
-			var fuzzifiedInput =new Dictionary<LinguisticVariable, Dictionary<Term, double>>();
+			var fuzzifiedInput = new Dictionary<LinguisticVariable, Dictionary<Term, double>>();
 
 			foreach (var inputLinguisticVariable in _inputVariables)
 			{
@@ -88,15 +88,19 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 					case HedgeType.Slightly:
 						result = Math.Pow(result, 1.0 / 3.0); //Cube root
 						break;
+
 					case HedgeType.Somewhat:
 						result = Math.Sqrt(result);
 						break;
+
 					case HedgeType.Very:
 						result = result * result;
 						break;
+
 					case HedgeType.Extremely:
 						result = result * result * result;
 						break;
+
 					default:
 						break;
 				}
@@ -113,8 +117,7 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 			}
 		}
 
-
-		double EvaluateConditionPair(double cond1, double cond2, OperatorType op)
+		private double EvaluateConditionPair(double cond1, double cond2, OperatorType op)
 		{
 			if (op == OperatorType.And)
 			{
@@ -151,6 +154,5 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 				throw new Exception("Internal error.");
 			}
 		}
-
 	}
 }

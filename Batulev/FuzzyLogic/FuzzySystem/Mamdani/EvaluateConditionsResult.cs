@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using FuzzyLogic.FuzzySystem.Mamdani.Enums;
 using FuzzyLogic.FuzzySystem.Mamdani.Rules;
-using FuzzyLogic.Terms;
 
 namespace FuzzyLogic.FuzzySystem.Mamdani
 {
@@ -26,22 +25,23 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 			return new ImplicateResult(Implicate(result));
 		}
 
-		private Dictionary<MamdaniFuzzyRule, Func<double,double>> Implicate(Dictionary<MamdaniFuzzyRule, double> conditions)
+		private Dictionary<MamdaniFuzzyRule, Func<double, double>> Implicate(Dictionary<MamdaniFuzzyRule, double> conditions)
 		{
 			var conclusions = new Dictionary<MamdaniFuzzyRule, Func<double, double>>();
 
 			foreach (var rule in conditions.Keys)
 			{
-
 				MfCompositionType compType;
 				switch (_implMethod)
 				{
 					case ImplicationMethod.Min:
 						compType = MfCompositionType.Min;
 						break;
+
 					case ImplicationMethod.Production:
 						compType = MfCompositionType.Prod;
 						break;
+
 					default:
 						throw new Exception("Internal error.");
 				}
@@ -60,7 +60,7 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 
 	public class ConstantMembershipFunction
 	{
-		double _constValue;
+		private double _constValue;
 
 		/// <summary>
 		/// Constructor

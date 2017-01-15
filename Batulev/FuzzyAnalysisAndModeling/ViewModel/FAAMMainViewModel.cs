@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FuzzyLogic.FuzzySystem;
 using FuzzyLogic.FuzzySystem.Mamdani;
 using FuzzyLogic.LinguisticVariables;
@@ -42,7 +39,6 @@ namespace FuzzyAnalysisAndModeling.ViewModel
 			output1.Terms.Add(new TrianTerm("X1", -0.4, 0, 0.4));
 			output1.Terms.Add(new TrianTerm("X2", 0.1, 0.5, 0.9));
 			output1.Terms.Add(new TrianTerm("X3", 0.6, 1, 1.4));
-
 
 			var mamdani = new MamdaniFuzzySystem(new[] { input1, input2, input3 }, new[] { output1 });
 
@@ -93,7 +89,6 @@ namespace FuzzyAnalysisAndModeling.ViewModel
 			}
 		}
 
-
 		public string Results
 		{
 			get
@@ -112,7 +107,7 @@ namespace FuzzyAnalysisAndModeling.ViewModel
 
 				string result = String.Empty;
 				int iterator = 0;
-				for (double i = 0; i <= 1; i=i+ step)
+				for (double i = 0; i <= 1; i = i + step)
 				{
 					for (double j = 0; j <= 1; j = j + step)
 					{
@@ -120,8 +115,7 @@ namespace FuzzyAnalysisAndModeling.ViewModel
 						{
 							iterator++;
 							var r = String.Join(",", _fuzzySystem.Evaluate(i, j, k).Select(x => x.Result));
-							result += $"{iterator}        {i}        {j}        {k}        {r}\r\n";
-							
+							result += $"{iterator}\t{i}\t{j}\t{k}\t{r}\r\n";
 						}
 					}
 				}
@@ -139,13 +133,12 @@ namespace FuzzyAnalysisAndModeling.ViewModel
 
 			if (string.IsNullOrWhiteSpace(_in1) || string.IsNullOrWhiteSpace(_in2) || string.IsNullOrWhiteSpace(_in3) ||
 				!double.TryParse(_in1, out in1) || !double.TryParse(_in2, out in2) || !double.TryParse(_in3, out in3) ||
-				_fuzzySystem==null)
+				_fuzzySystem == null)
 			{
 				return String.Empty;
 			}
 
 			return String.Join(",", _fuzzySystem.Evaluate(in1, in2, in3).Select(x => x.Result));
 		}
-
 	}
 }

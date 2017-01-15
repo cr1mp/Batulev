@@ -6,7 +6,7 @@ using FuzzyLogic.LinguisticVariables;
 
 namespace FuzzyLogic.FuzzySystem.Mamdani
 {
-	public class MamdaniFuzzySystem: IFuzzySystem
+	public class MamdaniFuzzySystem : IFuzzySystem
 	{
 		private readonly InputLinguisticVariable[] _inputLinguisticVariables;
 		private readonly OutputLinguisticVariable[] _outputLinguisticVariables;
@@ -27,9 +27,9 @@ namespace FuzzyLogic.FuzzySystem.Mamdani
 			}
 
 			Fuzzify(_inputLinguisticVariables)
-						.EvaluateConditions(_rules,AndMethod.Min, OrMethod.Max)
+						.EvaluateConditions(_rules, AndMethod.Min, OrMethod.Max)
 						.Implicate(ImplicationMethod.Min)
-						.Aggregate(AggregationMethod.Max,_outputLinguisticVariables)
+						.Aggregate(AggregationMethod.Max, _outputLinguisticVariables)
 						.Defuzzify(DefuzzificationMethod.Centroid);
 
 			return _outputLinguisticVariables;

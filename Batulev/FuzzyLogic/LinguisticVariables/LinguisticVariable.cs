@@ -8,14 +8,14 @@ namespace FuzzyLogic.LinguisticVariables
 		private readonly List<Term> _terms;
 		private readonly string _name;
 
-		protected LinguisticVariable(string name,double min,double max)
+		protected LinguisticVariable(string name, double min, double max)
 		{
 			_terms = new List<Term>();
 			_name = name;
 
 			Range = new Range
 			{
-				Min=min,
+				Min = min,
 				Max = max
 			};
 		}

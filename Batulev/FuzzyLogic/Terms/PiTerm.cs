@@ -4,12 +4,12 @@ namespace FuzzyLogic.Terms
 {
 	public class PiTerm : Term
 	{
-		public PiTerm(string name) 
+		public PiTerm(string name)
 			: base(name)
 		{
 		}
 
-		public PiTerm(string name,double a, double b, double c, double d)
+		public PiTerm(string name, double a, double b, double c, double d)
 			: this(name)
 		{
 			this.a = a;
@@ -35,7 +35,7 @@ namespace FuzzyLogic.Terms
 
 			if (a <= x && x <= (a + b) / 2)
 			{
-				return 2 * Math.Pow( (x - a) / (b - a), 2);
+				return 2 * Math.Pow((x - a) / (b - a), 2);
 			}
 
 			if ((a + b) / 2 <= x && x <= b)
@@ -48,14 +48,14 @@ namespace FuzzyLogic.Terms
 				return 1;
 			}
 
-			if (c <= x && x <= (c + d)/2)
+			if (c <= x && x <= (c + d) / 2)
 			{
-				return 1 - 2*Math.Pow( (x-c)/(d-c) , 2);
+				return 1 - 2 * Math.Pow((x - c) / (d - c), 2);
 			}
 
-			if ((c + d)/2 <= x && x <= d)
+			if ((c + d) / 2 <= x && x <= d)
 			{
-				return 2*Math.Pow((x-d)/(d-c), 2);
+				return 2 * Math.Pow((x - d) / (d - c), 2);
 			}
 
 			if (x >= d)
@@ -65,7 +65,5 @@ namespace FuzzyLogic.Terms
 
 			throw new InvalidOperationException("Ни одно из условий не выполнилось.");
 		}
-
-		
 	}
 }

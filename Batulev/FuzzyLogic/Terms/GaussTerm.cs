@@ -20,7 +20,6 @@ namespace FuzzyLogic.Terms
 
 		public double c { get; set; }
 
-		public override double GetValue(double x)=> Math.Exp((-1 * Math.Pow(x - c, 2)) / (2 * Math.Pow(sigm, 2)));
-
+		public override double GetValue(double x) => Math.Exp((-1 * Math.Pow(x - c, 2)) / (2 * Math.Pow(sigm, 2)));
 	}
 }

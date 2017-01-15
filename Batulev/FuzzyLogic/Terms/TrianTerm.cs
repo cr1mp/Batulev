@@ -23,19 +23,19 @@ namespace FuzzyLogic.Terms
 
 		public override double GetValue(double x)
 		{
-			if (x <= a )
+			if (x <= a)
 			{
 				return 0;
 			}
 
 			if (a <= x && x <= b)
 			{
-				return (x - a)/(b - a);
+				return (x - a) / (b - a);
 			}
 
 			if (b <= x && x <= c)
 			{
-				return (c - x)/(c - b);
+				return (c - x) / (c - b);
 			}
 
 			if (c <= x)
