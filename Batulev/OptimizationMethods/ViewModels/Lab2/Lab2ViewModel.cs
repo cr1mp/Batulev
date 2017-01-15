@@ -56,8 +56,8 @@ namespace OptimizationMethods.ViewModels.Lab2
 				{
 					var r = new ResultType
 					{
-						Max = Compute($"Maximize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}][[1]]"),
-						//Min =Compute($"Minimize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}][[1]]"),
+						Max = Compute($"NMaximize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}][[1]]"),
+						//Min =Compute($"NMinimize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}][[1]]"),
 						FMax = Compute($"Maximize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}]"),
 						//FMin =Compute($"Minimize[{{ {i} * x1 + {j} * x2, x1 + x2 <= 20 && 4 * x1 + 2 * x2 <= 80 && x1 + 5 * x2 <= 140 && x1 >= 0 && x2 >= 0 }},{{x1,x2}}]"),
 						k1 = i,

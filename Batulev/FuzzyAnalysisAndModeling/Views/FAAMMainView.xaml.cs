@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FuzzyAnalysisAndModeling.ViewModel;
 
 namespace FuzzyAnalysisAndModeling.Views
 {
@@ -20,9 +21,10 @@ namespace FuzzyAnalysisAndModeling.Views
 	/// </summary>
 	public partial class FAAMMainView : UserControl
 	{
-		public FAAMMainView()
+		public FAAMMainView(FAAMMainViewModel model)
 		{
 			InitializeComponent();
+			this.DataContext = model;
 		}
 	}
 }

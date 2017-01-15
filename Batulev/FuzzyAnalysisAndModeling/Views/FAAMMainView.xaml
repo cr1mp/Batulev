@@ -6,7 +6,62 @@
              xmlns:local="clr-namespace:FuzzyAnalysisAndModeling.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-	<TextBlock>
-		Нечеткий анализ и моделирование
-	</TextBlock>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<TextBlock Grid.Row="0"
+				   Grid.Column="0"
+				   Grid.ColumnSpan="2">
+		Нечеткий анализ и моделирование Лаба 5
+		</TextBlock>
+
+		<TextBlock Grid.Row="1"
+				   Grid.Column="0">In1</TextBlock>
+		<TextBox Grid.Row="1"
+				 Grid.Column="1"
+				 Text="{Binding In1, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<TextBlock Grid.Row="2"
+				   Grid.Column="0">In2</TextBlock>
+		<TextBox Grid.Row="2"
+				 Grid.Column="1"
+				 Text="{Binding In2, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<TextBlock Grid.Row="3"
+				   Grid.Column="0">In3</TextBlock>
+		<TextBox Grid.Row="3"
+				 Grid.Column="1"
+				 Text="{Binding In3, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<TextBlock Grid.Row="4"
+				   Grid.Column="0">Out1</TextBlock>
+		<TextBlock Grid.Row="4"
+				 Grid.Column="1"
+				 Text="{Binding Out1}"/>
+
+		<TextBlock Grid.Row="5"
+				   Grid.Column="0">Step</TextBlock>
+		<TextBox Grid.Row="5"
+				 Grid.Column="1"
+				 Text="{Binding Step, UpdateSourceTrigger=PropertyChanged}"/>
+
+		<TextBlock Grid.Row="6"
+				   Grid.Column="0">Out1</TextBlock>
+		<TextBox Grid.Row="6"
+				   Grid.Column="1"
+				   TextWrapping="Wrap"
+				   Text="{Binding Results, Mode=OneWay}"/>
+	</Grid>
 </UserControl>

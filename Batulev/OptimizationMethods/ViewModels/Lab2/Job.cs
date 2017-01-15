@@ -131,14 +131,14 @@ namespace OptimizationMethods.ViewModels.Lab2
 
 				if (_isMax)
 				{
-					r.Max = Compute($"Maximize[{{ {f} }},{{ {xs} }}][[1]]");
+					r.Max = Compute($"NMaximize[{{ {f} }},{{ {xs} }}][[1]]");
 					r.FMax = Compute($"Maximize[{{ {f} }},{{ {xs} }}]");
 
 					sb.Append(r.Max + ",");
 				}
 				else
 				{
-					r.Min = Compute($"Minimize[{{ {f} }},{{ {xs} }}][[1]]");
+					r.Min = Compute($"NMinimize[{{ {f} }},{{ {xs} }}][[1]]");
 					r.FMin = Compute($"Minimize[{{ {f} }},{{ {xs} }}]");
 
 					sb.Append(r.Min + ",");

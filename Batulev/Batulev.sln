@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyAnalysisAndModeling", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicsOfPedagogyInHigherEducation", "BasicsOfPedagogyInHigherEducation\BasicsOfPedagogyInHigherEducation.csproj", "{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FuzzyLogic", "FuzzyLogic\FuzzyLogic.csproj", "{25E53C68-D6FD-4ED4-B087-B853C2D7896F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25E53C68-D6FD-4ED4-B087-B853C2D7896F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25E53C68-D6FD-4ED4-B087-B853C2D7896F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25E53C68-D6FD-4ED4-B087-B853C2D7896F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25E53C68-D6FD-4ED4-B087-B853C2D7896F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,5 +77,6 @@ Global
 		{5DF2B7BE-6474-4A5B-8569-A931116F4E61} = {32C557BF-0A8B-40AA-A217-A72FA3A3C8A6}
 		{5CD684A6-938B-4C27-9787-E2216382662C} = {08AA981F-A6F7-4476-B868-37C2F89BEE9C}
 		{60171CA4-AB6B-4A7E-BCDF-E8EDF49B2632} = {D714348C-3AE9-4851-8C84-C31D307A257D}
+		{25E53C68-D6FD-4ED4-B087-B853C2D7896F} = {08AA981F-A6F7-4476-B868-37C2F89BEE9C}
 	EndGlobalSection
 EndGlobal
