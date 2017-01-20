@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MathematicalMethodsAnalysisComplexSystems.ViewModel;
 
 namespace MathematicalMethodsAnalysisComplexSystems.Views
 {
@@ -20,9 +21,10 @@ namespace MathematicalMethodsAnalysisComplexSystems.Views
 	/// </summary>
 	public partial class MMACSMainView : UserControl
 	{
-		public MMACSMainView()
+		public MMACSMainView(MMACSMainViewModel model)
 		{
 			InitializeComponent();
+			DataContext = model;
 		}
 	}
 }
