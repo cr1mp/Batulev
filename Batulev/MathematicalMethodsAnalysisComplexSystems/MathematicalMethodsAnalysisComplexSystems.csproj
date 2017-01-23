@@ -90,10 +90,14 @@
   <ItemGroup>
     <Compile Include="MMACSModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\FunctionPar.cs" />
     <Compile Include="ViewModel\MathixHelper.cs" />
+    <Compile Include="ViewModel\MguaParams.cs" />
     <Compile Include="ViewModel\MMACSMainViewData.cs" />
     <Compile Include="ViewModel\MMACSMainViewModel.cs" />
     <Compile Include="ViewModel\ResultViewModel.cs" />
+    <Compile Include="ViewModel\Row.cs" />
+    <Compile Include="ViewModel\TrainingCheckingSample.cs" />
     <Compile Include="Views\MMACSMainView.xaml.cs">
       <DependentUpon>MMACSMainView.xaml</DependentUpon>
     </Compile>

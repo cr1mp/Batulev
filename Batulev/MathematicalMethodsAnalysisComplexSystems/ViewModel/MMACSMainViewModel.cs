@@ -7,7 +7,6 @@ using Microsoft.Win32;
 using OfficeOpenXml;
 using Prism.Mvvm;
 
-
 namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 {
 	/// <summary>
@@ -49,7 +48,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 					fileName = Convert(fileName);
 				}
 
-
 				var newFile = new FileInfo(fileName);
 
 				var pck = new ExcelPackage(newFile);
@@ -64,7 +62,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				for (var rowNum = 0; rowNum < _rowCount; rowNum++)
 				{
 					_originalTable[rowNum] = new double[_columnCount];
-
 
 					var wsRow = firstWorksheet.Cells[rowNum + 1, 1, rowNum + 1, _columnCount];
 
@@ -186,7 +183,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 		/// <param name="mguaParams">Исходные данные или данные предыдущего ряда селекции.</param>
 		private void Mgua(MguaParams mguaParams)
 		{
-
 			// 1. Выборка делится на обучающую и проверочную.
 			// Nвыб = Nобуч + Nпров
 			var trainingCheckingSample = DivideTrainingCheckingSample(mguaParams.Sample);
@@ -198,12 +194,12 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			var regressionCoefficients = EvaluateRegressionCoefficients(trainingCheckingSample.TrainingSample);
 
 			// 3. На проверочной выборке отбираются лучшие модели.
-			var bestModels = GetBestModels(trainingCheckingSample.CheckingSample, regressionCoefficients,parX);
+			var bestModels = GetBestModels(trainingCheckingSample.CheckingSample, regressionCoefficients, parX);
 
 			// 4. Проверяется критерий E^2 -> min.
 			double epsilonSquaredMin = bestModels.First().Value;
 
-			FillResult(iteration++, epsilonSquaredMin, regressionCoefficients, bestModels.Values.ToArray(),bestModels.Keys.ToArray());
+			FillResult(iteration++, epsilonSquaredMin, regressionCoefficients, bestModels.Values.ToArray(), bestModels.Keys.ToArray());
 
 			// 6. Операция повторяется до тех пор, пока не выполнится условие.
 			if (mguaParams.EpsilonSquaredMin.HasValue && mguaParams.EpsilonSquaredMin < epsilonSquaredMin)
@@ -236,7 +232,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 
 				result.Add(new Row
 				{
-					Pars = new []
+					Pars = new[]
 					{
 						new FunctionPar
 						{
@@ -281,7 +277,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			return result.ToArray();
 		}
 
-		private double[][] GetNewVariables(double[][] mguaParamsSample, double[][] coefArr, Row[] allRowFunctions,string[] bestModelsSortedFunctionName)
+		private double[][] GetNewVariables(double[][] mguaParamsSample, double[][] coefArr, Row[] allRowFunctions, string[] bestModelsSortedFunctionName)
 		{
 			var rowCount = mguaParamsSample.Length;
 
@@ -290,22 +286,21 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			{
 				var colCount = mguaParamsSample[rowNumber].Length;
 				result[rowNumber] = new double[colCount];
-				for (int colNumber = 0; colNumber < colCount-1; colNumber++)
+				for (int colNumber = 0; colNumber < colCount - 1; colNumber++)
 				{
 					var functionName = bestModelsSortedFunctionName[colNumber];
 					result[rowNumber][colNumber] = GetVariable(coefArr[colNumber], allRowFunctions[rowNumber].Pars
-																											 .First(x=>x.Name== functionName)
+																											 .First(x => x.Name == functionName)
 																											 .X1, allRowFunctions[rowNumber].Pars
 																																			.First(x => x.Name == functionName)
 																																			.X2);
 				}
 				result[rowNumber][colCount - 1] = mguaParamsSample[rowNumber][colCount - 1];
-
 			}
 			return result;
 		}
 
-		private double GetVariable(double[] coefArr,double x1,double x2)
+		private double GetVariable(double[] coefArr, double x1, double x2)
 		{
 			var a0 = coefArr[0];
 			var a1 = coefArr[1];
@@ -314,15 +309,14 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			var a4 = coefArr[4];
 			var a5 = coefArr[5];
 
-			return a0 + a1*x1 + a2*x2 + a3*x1*x1 + a4*x2*x2 + a5*x1*x2;
+			return a0 + a1 * x1 + a2 * x2 + a3 * x1 * x1 + a4 * x2 * x2 + a5 * x1 * x2;
 		}
-
 
 		/// <summary>
 		/// Делим выборку на обучающую и проверочную.
 		/// </summary>
 		/// <returns></returns>
-		TrainingCheckingSample DivideTrainingCheckingSample(double[][] sample)
+		private TrainingCheckingSample DivideTrainingCheckingSample(double[][] sample)
 		{
 			var training = new List<double[]>();
 			var checking = new List<double[]>();
@@ -358,6 +352,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			var trainingRowsCount = trainingSample.Length;
 
 			#region Создаем и инициализируем матрицы
+
 			double[][] matr1 = new double[trainingRowsCount][];
 			double[][] matr2 = new double[trainingRowsCount][];
 			double[][] matr3 = new double[trainingRowsCount][];
@@ -373,11 +368,12 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				matr5[i] = new double[_coefficientArrayCount];
 				matr6[i] = new double[_coefficientArrayCount];
 			}
-			#endregion
 
-			// Требуется создать 4*(4-1)/2 = 6 функций с попарным сочетанием входных переменных 
+			#endregion Создаем и инициализируем матрицы
+
+			// Требуется создать 4*(4-1)/2 = 6 функций с попарным сочетанием входных переменных
 			// функции вида y = a0 + a1 *x1 + a2* x2 + a3*x1*x1 + a4*x2*x2 + a5*x1*x2
-			// для решения имеющимся набором библиотечных функций зададим матрицы, в которых приведем эти уравнения к 
+			// для решения имеющимся набором библиотечных функций зададим матрицы, в которых приведем эти уравнения к
 			// линейному виду, то есть заранее рассчитаем перемножения иксов.
 
 			for (int rowNumber = 0; rowNumber < trainingRowsCount; ++rowNumber)
@@ -450,7 +446,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			double[][] design5 = MathixHelper.Design(matr5);
 			double[][] design6 = MathixHelper.Design(matr6);
 
-
 			double[][] coefArr = new double[6][];
 
 			// a0
@@ -475,9 +470,8 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 		/// <param name="checkingSample"></param>
 		/// <param name="regressionCoefficients"></param>
 		/// <returns></returns>
-		private Dictionary<string,double> GetBestModels(double[][] checkingSample, double[][] regressionCoefficients,Row[] allRows)
+		private Dictionary<string, double> GetBestModels(double[][] checkingSample, double[][] regressionCoefficients, Row[] allRows)
 		{
-
 			var checkingRowsCount = checkingSample.Length;
 
 			double epsSquareAcc1 = 0;
@@ -513,7 +507,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			result["x2x4"] = (double)epsSquareAcc5 / checkingRowsCount;
 			result["x3x4"] = (double)epsSquareAcc6 / checkingRowsCount;
 
-			return result.OrderBy(x=>x.Value).Take(4).ToDictionary(x=>x.Key,x=>x.Value);
+			return result.OrderBy(x => x.Value).Take(4).ToDictionary(x => x.Key, x => x.Value);
 		}
 
 		private double[][] Split(double[][] checkingSample, double[][] trainingSample)
@@ -526,7 +520,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 
 			for (int rowNumber = 0; rowNumber < len; rowNumber++)
 			{
-				if (rowNumber%2 == 0)
+				if (rowNumber % 2 == 0)
 				{
 					result.Add(trainingSample[ti]);
 					ti++;
@@ -540,7 +534,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			return result.ToArray();
 		}
 
-		private void FillResult(int iteration, double epsilonSquaredCurrent, double[][] coefArr, double[] epsArray,string[] bestFunc)
+		private void FillResult(int iteration, double epsilonSquaredCurrent, double[][] coefArr, double[] epsArray, string[] bestFunc)
 		{
 			var sel = new ResultViewModel
 			{
@@ -548,7 +542,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				Value = epsilonSquaredCurrent.ToString(),
 			};
 
-			var d = new Dictionary<string,string>();
+			var d = new Dictionary<string, string>();
 
 			d["x1x2"] =
 				$"f1(x1,x2) = {coefArr[0][0]:#.##} + {coefArr[0][1]:#.##} * x1 + {coefArr[0][2]:#.##} * x2 + {coefArr[0][3]:#.##} * x1^2 + {coefArr[0][4]:#.##} * x2^2 + {coefArr[0][5]:#.##} * x1 * x2";
@@ -567,8 +561,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				sel.Functions.Add(d[s]);
 			}
 
-			
-
 			sel.Eps.Add($"Eps^2 = {epsArray[0]:#.##}");
 			sel.Eps.Add($"Eps^2 = {epsArray[1]:#.##}");
 			sel.Eps.Add($"Eps^2 = {epsArray[2]:#.##}");
@@ -578,50 +570,5 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 
 			Selection.Add(sel);
 		}
-
-		private static void SortArray(double[] epsArray, int[] sortingFuncsNumbers)
-		{
-			for (int i = 0; i < _coefficientArrayCount; i++)
-			{
-				for (int j = 0; j < _coefficientArrayCount - 1; j++)
-				{
-					if (epsArray[j] >= epsArray[j + 1])
-					{
-						double buf1 = epsArray[j];
-						epsArray[j] = epsArray[j + 1];
-						epsArray[j + 1] = buf1;
-
-						int buf2 = sortingFuncsNumbers[j];
-						sortingFuncsNumbers[j] = sortingFuncsNumbers[j + 1];
-						sortingFuncsNumbers[j + 1] = buf2;
-					}
-				}
-			}
-		}
-	}
-
-	class MguaParams
-	{
-		public double? EpsilonSquaredMin { get; set; }
-		public double[][] Sample { get; set; }
-	}
-
-	class TrainingCheckingSample
-	{
-		public double[][] TrainingSample { get; set; }
-		public double[][] CheckingSample { get; set; }
-	}
-
-	class Row
-	{
-		public FunctionPar[] Pars { get; set; }
-	}
-
-	class FunctionPar
-	{
-		public string Name { get; set; }
-
-		public double X1 { get; set; }
-		public double X2 { get; set; }
 	}
 }
