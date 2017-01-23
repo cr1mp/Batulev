@@ -46,9 +46,9 @@
 						<ColumnDefinition Width="*"/>
 					</Grid.ColumnDefinitions>
 
-					<TextBlock Text="{Binding Step}"
+					<!--<TextBlock Text="{Binding Step}"
 							   Grid.Row="0"
-							   Margin="10"/>
+							   Margin="10"/>-->
 					<ListBox ItemsSource="{Binding Functions }"
 							
 							 Grid.Row="0"

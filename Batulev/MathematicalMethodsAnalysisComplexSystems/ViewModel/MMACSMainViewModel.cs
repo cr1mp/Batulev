@@ -22,13 +22,14 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 		/// </summary>
 		private const int _coefficientArrayCount = 6;
 
+		private int iteration;
+
 		private int _rowCount;
 		private int _columnCount;
 
 		private int _trainingRowsCount;
 		private int _checkingRowsCount;
 
-		private int _numberOfInputVariables;
 		private int _columnIndexOutputVariable;
 
 		private double[][] _originalTable;
@@ -58,8 +59,6 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				_rowCount = firstWorksheet.Dimension.End.Row;
 				_columnCount = firstWorksheet.Dimension.End.Column;
 
-				_numberOfInputVariables = _columnIndexOutputVariable = _columnCount - 1;
-
 				_originalTable = new double[_rowCount][];
 
 				for (var rowNum = 0; rowNum < _rowCount; rowNum++)
@@ -88,7 +87,12 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				Selection.Clear();
 				OnPropertyChanged(nameof(Selection));
 
-				MGUA();
+				iteration = 0;
+
+				Mgua(new MguaParams
+				{
+					Sample = _originalTable
+				});
 			}
 		}
 
@@ -174,210 +178,369 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			return tbl.DefaultView;
 		}
 
-
-		private void MGUA()
+		/// <summary>
+		/// Многорядный полиномиальный алгоритм МГУА.
+		/// Опорная функция - полином вида
+		/// y = a0 + a1x1 + a2x2 + a3x1^2 + a4x2^2 + a5x1x2
+		/// </summary>
+		/// <param name="mguaParams">Исходные данные или данные предыдущего ряда селекции.</param>
+		private void Mgua(MguaParams mguaParams)
 		{
-			// Критерий минимума на текущем шаге.
-			double epsilonSquaredCurrent = 0;
-			// Критерий минимума на предыдущем шаге.
-			double epsilonSquaredPrev = double.MaxValue;
-			// Текущая итерация.
-			int iteration = 1;
 
-			int[] sortingFuncsNumbers = new int[6];
-			double[][] coefArr = new double[6][];
+			// 1. Выборка делится на обучающую и проверочную.
+			// Nвыб = Nобуч + Nпров
+			var trainingCheckingSample = DivideTrainingCheckingSample(mguaParams.Sample);
 
-			// Проверяются величины критерия точности для наилучших моделей
-			// текущего и предыдущего ряда селекции.
-			while (true)
+			var parX = GetAllParX(mguaParams.Sample);
+
+			// 2. На обучающей выборке вычисляются коэффициенты регрессии.
+			// a0-a5
+			var regressionCoefficients = EvaluateRegressionCoefficients(trainingCheckingSample.TrainingSample);
+
+			// 3. На проверочной выборке отбираются лучшие модели.
+			var bestModels = GetBestModels(trainingCheckingSample.CheckingSample, regressionCoefficients,parX);
+
+			// 4. Проверяется критерий E^2 -> min.
+			double epsilonSquaredMin = bestModels.First().Value;
+
+			FillResult(iteration++, epsilonSquaredMin, regressionCoefficients, bestModels.Values.ToArray(),bestModels.Keys.ToArray());
+
+			// 6. Операция повторяется до тех пор, пока не выполнится условие.
+			if (mguaParams.EpsilonSquaredMin.HasValue && mguaParams.EpsilonSquaredMin < epsilonSquaredMin)
 			{
-				if (iteration != 1)
-				{
-					double[][] buf = new double[_trainingRowsCount][];
-
-					for (int i = 0; i < _trainingRowsCount; ++i)
-					{
-						buf[i] = new double[_columnCount];
-
-						for (int j = 0; j < 4; j++)
-						{
-							buf[i][j] = MathixHelper.getNewValue(sortingFuncsNumbers[j], coefArr, _dataTraining[i]);
-						}
-
-						buf[i][4] = _dataTraining[i][4];
-						_dataTraining[i] = buf[i];
-					}
-				}
-
-				#region Создаем и инициализируем матрицы
-				double[][] matr1 = new double[_trainingRowsCount][];
-				double[][] matr2 = new double[_trainingRowsCount][];
-				double[][] matr3 = new double[_trainingRowsCount][];
-				double[][] matr4 = new double[_trainingRowsCount][];
-				double[][] matr5 = new double[_trainingRowsCount][];
-				double[][] matr6 = new double[_trainingRowsCount][];
-				for (int i = 0; i < _trainingRowsCount; ++i)
-				{
-					matr1[i] = new double[_coefficientArrayCount];
-					matr2[i] = new double[_coefficientArrayCount];
-					matr3[i] = new double[_coefficientArrayCount];
-					matr4[i] = new double[_coefficientArrayCount];
-					matr5[i] = new double[_coefficientArrayCount];
-					matr6[i] = new double[_coefficientArrayCount];
-				}
-				#endregion
-
-				for (int i = 0; i < _trainingRowsCount; ++i)
-				{
-					var x1 = _dataTraining[i][0];
-					var x2 = _dataTraining[i][1];
-					var x3 = _dataTraining[i][2];
-					var x4 = _dataTraining[i][3];
-					var y = _dataTraining[i][4];
-
-					//x1 x2 x1^2 x2^2 x1*x2 y
-					matr1[i][0] = x1;
-					matr1[i][1] = x2;
-					matr1[i][2] = x1 * x1;
-					matr1[i][3] = x2 * x2;
-					matr1[i][4] = x1 * x2;
-					matr1[i][5] = y;
-
-					//x1 x3 x1^2 x3^2 x1*x3 y
-					matr2[i][0] = x1;
-					matr2[i][1] = x3;
-					matr2[i][2] = x1 * x1;
-					matr2[i][3] = x3 * x3;
-					matr2[i][4] = x1 * x3;
-					matr2[i][5] = y;
-
-					//x1 x4 x1^2 x4^2 x1*x4 y
-					matr3[i][0] = x1;
-					matr3[i][1] = x4;
-					matr3[i][2] = x1 * x1;
-					matr3[i][3] = x4 * x4;
-					matr3[i][4] = x1 * x4;
-					matr3[i][5] = y;
-
-					//x2 x3 x2^2 x3^2 x2*x3 y
-					matr4[i][0] = x2;
-					matr4[i][1] = x3;
-					matr4[i][2] = x2 * x2;
-					matr4[i][3] = x3 * x3;
-					matr4[i][4] = x2 * x3;
-					matr4[i][5] = y;
-
-					//x2 x4 x2^2 x4^2 x2*x4 y
-					matr5[i][0] = x2;
-					matr5[i][1] = x4;
-					matr5[i][2] = x2 * x2;
-					matr5[i][3] = x4 * x4;
-					matr5[i][4] = x2 * x4;
-					matr5[i][5] = y;
-
-					//x3 x4 x3^2 x4^2 x3*x4 y
-					matr6[i][0] = x3;
-					matr6[i][1] = x4;
-					matr6[i][2] = x3 * x3;
-					matr6[i][3] = x4 * x4;
-					matr6[i][4] = x3 * x4;
-					matr6[i][5] = y;
-				}
-
-				double[][] design1 = MathixHelper.Design(matr1);
-				double[][] design2 = MathixHelper.Design(matr2);
-				double[][] design3 = MathixHelper.Design(matr3);
-				double[][] design4 = MathixHelper.Design(matr4);
-				double[][] design5 = MathixHelper.Design(matr5);
-				double[][] design6 = MathixHelper.Design(matr6);
-
-				double[] coef1 = MathixHelper.Solve(design1);
-				double[] coef2 = MathixHelper.Solve(design2);
-				double[] coef3 = MathixHelper.Solve(design3);
-				double[] coef4 = MathixHelper.Solve(design4);
-				double[] coef5 = MathixHelper.Solve(design5);
-				double[] coef6 = MathixHelper.Solve(design6);
-
-				coefArr[0] = coef1;
-				coefArr[1] = coef2;
-				coefArr[2] = coef3;
-				coefArr[3] = coef4;
-				coefArr[4] = coef5;
-				coefArr[5] = coef6;
-
-				if (iteration != 1)
-				{
-					double[][] buf = new double[_checkingRowsCount][];
-					for (int i = 0; i < _checkingRowsCount; ++i)
-					{
-						buf[i] = new double[_columnCount];
-
-						for (int j = 0; j < _numberOfInputVariables; j++)
-						{
-							buf[i][j] = MathixHelper.getNewValue(sortingFuncsNumbers[j], coefArr, _dataChecking[i]);
-						}
-						buf[i][_columnIndexOutputVariable] = _dataChecking[i][_columnIndexOutputVariable];
-
-						_dataChecking[i] = buf[i];
-					}
-				}
-
-				double epsSquare1 = 0;
-				double epsSquare2 = 0;
-				double epsSquare3 = 0;
-				double epsSquare4 = 0;
-				double epsSquare5 = 0;
-				double epsSquare6 = 0;
-
-				for (int i = 0; i < _checkingRowsCount; i++)
-				{
-					var x1 = _dataChecking[i][0];
-					var x2 = _dataChecking[i][1];
-					var x3 = _dataChecking[i][2];
-					var x4 = _dataChecking[i][3];
-					var y = _dataChecking[i][_columnIndexOutputVariable];
-
-					epsSquare1 += Math.Pow(y - MathixHelper.solveFunction(coef1, x1, x2), 2);
-					epsSquare2 += Math.Pow(y - MathixHelper.solveFunction(coef2, x1, x3), 2);
-					epsSquare3 += Math.Pow(y - MathixHelper.solveFunction(coef3, x1, x4), 2);
-					epsSquare4 += Math.Pow(y - MathixHelper.solveFunction(coef4, x2, x3), 2);
-					epsSquare5 += Math.Pow(y - MathixHelper.solveFunction(coef5, x2, x4), 2);
-					epsSquare6 += Math.Pow(y - MathixHelper.solveFunction(coef6, x3, x4), 2);
-				}
-
-
-				double[] epsArray = new double[_coefficientArrayCount];
-
-				epsArray[0] = (double)epsSquare1 / _checkingRowsCount;
-				epsArray[1] = (double)epsSquare2 / _checkingRowsCount;
-				epsArray[2] = (double)epsSquare3 / _checkingRowsCount;
-				epsArray[3] = (double)epsSquare4 / _checkingRowsCount;
-				epsArray[4] = (double)epsSquare5 / _checkingRowsCount;
-				epsArray[5] = (double)epsSquare6 / _checkingRowsCount;
-
-
-				for (int i = 0; i < _coefficientArrayCount; i++)
-				{
-					sortingFuncsNumbers[i] = i;
-				}
-
-				SortArray(epsArray, sortingFuncsNumbers);
-
-				epsilonSquaredPrev = epsilonSquaredCurrent;
-				epsilonSquaredCurrent = epsArray[0];
-
-				FillResult(iteration, epsilonSquaredCurrent, coefArr, epsArray);
-
-				if (epsilonSquaredCurrent > epsilonSquaredPrev && iteration > 1)
-				{
-					break;
-				}
-
-				iteration++;
+				return;
 			}
+
+			// 5. Лучшие модели используются для расчета новых аргументов.
+			// Расчет переменных для следующего шага селекции.
+			mguaParams.Sample = GetNewVariables(mguaParams.Sample, regressionCoefficients, parX, bestModels.Keys.ToArray());
+
+			// Фиксация E^2s min для сравнения на следующем ряде селекции.
+			// (s - номер селекции)
+			mguaParams.EpsilonSquaredMin = epsilonSquaredMin;
+
+			Mgua(mguaParams);
 		}
 
-		private void FillResult(int iteration, double epsilonSquaredCurrent, double[][] coefArr, double[] epsArray)
+		private Row[] GetAllParX(double[][] sample)
+		{
+			var rowCount = sample.Length;
+			var result = new List<Row>();
+
+			for (int rowNumber = 0; rowNumber < rowCount; rowNumber++)
+			{
+				var x1 = sample[rowNumber][0];
+				var x2 = sample[rowNumber][1];
+				var x3 = sample[rowNumber][2];
+				var x4 = sample[rowNumber][3];
+
+				result.Add(new Row
+				{
+					Pars = new []
+					{
+						new FunctionPar
+						{
+							Name = "x1x2",
+							X1 = x1,
+							X2 = x2
+						},
+						new FunctionPar
+						{
+							Name = "x1x3",
+							X1 = x1,
+							X2 = x3
+						},
+						new FunctionPar
+						{
+							Name = "x1x4",
+							X1 = x1,
+							X2 = x4
+						},
+						new FunctionPar
+						{
+							Name = "x2x3",
+							X1 = x2,
+							X2 = x3
+						},
+						new FunctionPar
+						{
+							Name = "x2x4",
+							X1 = x2,
+							X2 = x4
+						},
+						new FunctionPar
+						{
+							Name = "x3x4",
+							X1 = x3,
+							X2 = x4
+						},
+					}
+				});
+			}
+
+			return result.ToArray();
+		}
+
+		private double[][] GetNewVariables(double[][] mguaParamsSample, double[][] coefArr, Row[] allRowFunctions,string[] bestModelsSortedFunctionName)
+		{
+			var rowCount = mguaParamsSample.Length;
+
+			var result = new double[rowCount][];
+			for (int rowNumber = 0; rowNumber < rowCount; rowNumber++)
+			{
+				var colCount = mguaParamsSample[rowNumber].Length;
+				result[rowNumber] = new double[colCount];
+				for (int colNumber = 0; colNumber < colCount-1; colNumber++)
+				{
+					var functionName = bestModelsSortedFunctionName[colNumber];
+					result[rowNumber][colNumber] = GetVariable(coefArr[colNumber], allRowFunctions[rowNumber].Pars
+																											 .First(x=>x.Name== functionName)
+																											 .X1, allRowFunctions[rowNumber].Pars
+																																			.First(x => x.Name == functionName)
+																																			.X2);
+				}
+				result[rowNumber][colCount - 1] = mguaParamsSample[rowNumber][colCount - 1];
+
+			}
+			return result;
+		}
+
+		private double GetVariable(double[] coefArr,double x1,double x2)
+		{
+			var a0 = coefArr[0];
+			var a1 = coefArr[1];
+			var a2 = coefArr[2];
+			var a3 = coefArr[3];
+			var a4 = coefArr[4];
+			var a5 = coefArr[5];
+
+			return a0 + a1*x1 + a2*x2 + a3*x1*x1 + a4*x2*x2 + a5*x1*x2;
+		}
+
+
+		/// <summary>
+		/// Делим выборку на обучающую и проверочную.
+		/// </summary>
+		/// <returns></returns>
+		TrainingCheckingSample DivideTrainingCheckingSample(double[][] sample)
+		{
+			var training = new List<double[]>();
+			var checking = new List<double[]>();
+
+			for (int i = 0; i < sample.Length; i++)
+			{
+				// 2,4,6 ... проверочная
+				if (i % 2 == 0)
+				{
+					training.Add(sample[i]);
+				}
+				// обучающая
+				else
+				{
+					checking.Add(sample[i]);
+				}
+			}
+
+			return new TrainingCheckingSample
+			{
+				TrainingSample = training.ToArray(),
+				CheckingSample = checking.ToArray()
+			};
+		}
+
+		/// <summary>
+		/// Вычисляум коэффициенты регрессии.
+		/// </summary>
+		/// <param name="trainingSample"></param>
+		/// <returns>Массив коэффициентов для строк.</returns>
+		private double[][] EvaluateRegressionCoefficients(double[][] trainingSample)
+		{
+			var trainingRowsCount = trainingSample.Length;
+
+			#region Создаем и инициализируем матрицы
+			double[][] matr1 = new double[trainingRowsCount][];
+			double[][] matr2 = new double[trainingRowsCount][];
+			double[][] matr3 = new double[trainingRowsCount][];
+			double[][] matr4 = new double[trainingRowsCount][];
+			double[][] matr5 = new double[trainingRowsCount][];
+			double[][] matr6 = new double[trainingRowsCount][];
+			for (int i = 0; i < trainingRowsCount; ++i)
+			{
+				matr1[i] = new double[_coefficientArrayCount];
+				matr2[i] = new double[_coefficientArrayCount];
+				matr3[i] = new double[_coefficientArrayCount];
+				matr4[i] = new double[_coefficientArrayCount];
+				matr5[i] = new double[_coefficientArrayCount];
+				matr6[i] = new double[_coefficientArrayCount];
+			}
+			#endregion
+
+			// Требуется создать 4*(4-1)/2 = 6 функций с попарным сочетанием входных переменных 
+			// функции вида y = a0 + a1 *x1 + a2* x2 + a3*x1*x1 + a4*x2*x2 + a5*x1*x2
+			// для решения имеющимся набором библиотечных функций зададим матрицы, в которых приведем эти уравнения к 
+			// линейному виду, то есть заранее рассчитаем перемножения иксов.
+
+			for (int rowNumber = 0; rowNumber < trainingRowsCount; ++rowNumber)
+			{
+				var x1 = trainingSample[rowNumber][0];
+				var x2 = trainingSample[rowNumber][1];
+				var x3 = trainingSample[rowNumber][2];
+				var x4 = trainingSample[rowNumber][3];
+				var y = trainingSample[rowNumber][4];
+
+				// fi(x1,x2)
+				// x1 x2 x1^2 x2^2 x1*x2 y
+				matr1[rowNumber][0] = x1;
+				matr1[rowNumber][1] = x2;
+				matr1[rowNumber][2] = x1 * x1;
+				matr1[rowNumber][3] = x2 * x2;
+				matr1[rowNumber][4] = x1 * x2;
+				matr1[rowNumber][5] = y;
+
+				// fi(x1,x3)
+				// x1 x3 x1^2 x3^2 x1*x3 y
+				matr2[rowNumber][0] = x1;
+				matr2[rowNumber][1] = x3;
+				matr2[rowNumber][2] = x1 * x1;
+				matr2[rowNumber][3] = x3 * x3;
+				matr2[rowNumber][4] = x1 * x3;
+				matr2[rowNumber][5] = y;
+
+				// fi(x1,x4)
+				// x1 x4 x1^2 x4^2 x1*x4 y
+				matr3[rowNumber][0] = x1;
+				matr3[rowNumber][1] = x4;
+				matr3[rowNumber][2] = x1 * x1;
+				matr3[rowNumber][3] = x4 * x4;
+				matr3[rowNumber][4] = x1 * x4;
+				matr3[rowNumber][5] = y;
+
+				// fi(x2,x3)
+				// x2 x3 x2^2 x3^2 x2*x3 y
+				matr4[rowNumber][0] = x2;
+				matr4[rowNumber][1] = x3;
+				matr4[rowNumber][2] = x2 * x2;
+				matr4[rowNumber][3] = x3 * x3;
+				matr4[rowNumber][4] = x2 * x3;
+				matr4[rowNumber][5] = y;
+
+				// fi(x2,x4)
+				//x2 x4 x2^2 x4^2 x2*x4 y
+				matr5[rowNumber][0] = x2;
+				matr5[rowNumber][1] = x4;
+				matr5[rowNumber][2] = x2 * x2;
+				matr5[rowNumber][3] = x4 * x4;
+				matr5[rowNumber][4] = x2 * x4;
+				matr5[rowNumber][5] = y;
+
+				// fi(x3,x4)
+				// x3 x4 x3^2 x4^2 x3*x4 y
+				matr6[rowNumber][0] = x3;
+				matr6[rowNumber][1] = x4;
+				matr6[rowNumber][2] = x3 * x3;
+				matr6[rowNumber][3] = x4 * x4;
+				matr6[rowNumber][4] = x3 * x4;
+				matr6[rowNumber][5] = y;
+			}
+
+			double[][] design1 = MathixHelper.Design(matr1);
+			double[][] design2 = MathixHelper.Design(matr2);
+			double[][] design3 = MathixHelper.Design(matr3);
+			double[][] design4 = MathixHelper.Design(matr4);
+			double[][] design5 = MathixHelper.Design(matr5);
+			double[][] design6 = MathixHelper.Design(matr6);
+
+
+			double[][] coefArr = new double[6][];
+
+			// a0
+			coefArr[0] = MathixHelper.Solve(design1);
+			// a1
+			coefArr[1] = MathixHelper.Solve(design2);
+			// a2
+			coefArr[2] = MathixHelper.Solve(design3);
+			// a3
+			coefArr[3] = MathixHelper.Solve(design4);
+			// a4
+			coefArr[4] = MathixHelper.Solve(design5);
+			// a5
+			coefArr[5] = MathixHelper.Solve(design6);
+
+			return coefArr;
+		}
+
+		/// <summary>
+		/// Отбираем лучшие модели.
+		/// </summary>
+		/// <param name="checkingSample"></param>
+		/// <param name="regressionCoefficients"></param>
+		/// <returns></returns>
+		private Dictionary<string,double> GetBestModels(double[][] checkingSample, double[][] regressionCoefficients,Row[] allRows)
+		{
+
+			var checkingRowsCount = checkingSample.Length;
+
+			double epsSquareAcc1 = 0;
+			double epsSquareAcc2 = 0;
+			double epsSquareAcc3 = 0;
+			double epsSquareAcc4 = 0;
+			double epsSquareAcc5 = 0;
+			double epsSquareAcc6 = 0;
+
+			for (int i = 0; i < checkingRowsCount; i++)
+			{
+				var x1 = checkingSample[i][0];
+				var x2 = checkingSample[i][1];
+				var x3 = checkingSample[i][2];
+				var x4 = checkingSample[i][3];
+				var y = checkingSample[i][_columnIndexOutputVariable];
+
+				epsSquareAcc1 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[0], x1, x2), 2);
+				epsSquareAcc2 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[1], x1, x3), 2);
+				epsSquareAcc3 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[2], x1, x4), 2);
+				epsSquareAcc4 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[3], x2, x3), 2);
+				epsSquareAcc5 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[4], x2, x4), 2);
+				epsSquareAcc6 += Math.Pow(y - MathixHelper.solveFunction(regressionCoefficients[5], x3, x4), 2);
+			}
+
+			// пара имя функции и значение E^2
+			var result = new Dictionary<string, double>();
+
+			result["x1x2"] = (double)epsSquareAcc1 / checkingRowsCount;
+			result["x1x3"] = (double)epsSquareAcc2 / checkingRowsCount;
+			result["x1x4"] = (double)epsSquareAcc3 / checkingRowsCount;
+			result["x2x3"] = (double)epsSquareAcc4 / checkingRowsCount;
+			result["x2x4"] = (double)epsSquareAcc5 / checkingRowsCount;
+			result["x3x4"] = (double)epsSquareAcc6 / checkingRowsCount;
+
+			return result.OrderBy(x=>x.Value).Take(4).ToDictionary(x=>x.Key,x=>x.Value);
+		}
+
+		private double[][] Split(double[][] checkingSample, double[][] trainingSample)
+		{
+			var len = checkingSample.Length + trainingSample.Length;
+			var ci = 0;
+			var ti = 0;
+
+			var result = new List<double[]>();
+
+			for (int rowNumber = 0; rowNumber < len; rowNumber++)
+			{
+				if (rowNumber%2 == 0)
+				{
+					result.Add(trainingSample[ti]);
+					ti++;
+				}
+				else
+				{
+					result.Add(checkingSample[ci]);
+					ci++;
+				}
+			}
+			return result.ToArray();
+		}
+
+		private void FillResult(int iteration, double epsilonSquaredCurrent, double[][] coefArr, double[] epsArray,string[] bestFunc)
 		{
 			var sel = new ResultViewModel
 			{
@@ -385,19 +548,33 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 				Value = epsilonSquaredCurrent.ToString(),
 			};
 
-			sel.Functions.Add($"f1(x1,x2) = {coefArr[0][0]:#.##} + {coefArr[0][1]:#.##} * x1 + {coefArr[0][2]:#.##} * x2 + {coefArr[0][3]:#.##} * x1^2 + {coefArr[0][4]:#.##} * x2^2 + {coefArr[0][5]:#.##} * x1 * x2");
-			sel.Functions.Add($"f2(x1,x3) = {coefArr[1][0]:#.##} + {coefArr[1][1]:#.##} * x1 + {coefArr[1][2]:#.##} * x3 + {coefArr[1][3]:#.##} * x1^2 + {coefArr[1][4]:#.##} * x3^2 + {coefArr[1][5]:#.##} * x1 * x3");
-			sel.Functions.Add($"f3(x1,x4) = {coefArr[2][0]:#.##} + {coefArr[2][1]:#.##} * x1 + {coefArr[2][2]:#.##} * x4 + {coefArr[2][3]:#.##} * x1^2 + {coefArr[2][4]:#.##} * x4^2 + {coefArr[2][5]:#.##} * x1 * x4");
-			sel.Functions.Add($"f4(x2,x3) = {coefArr[3][0]:#.##} + {coefArr[3][1]:#.##} * x2 + {coefArr[3][2]:#.##} * x3 + {coefArr[3][3]:#.##} * x2^2 + {coefArr[3][4]:#.##} * x3^2 + {coefArr[3][5]:#.##} * x2 * x3");
-			sel.Functions.Add($"f5(x2,x4) = {coefArr[4][0]:#.##} + {coefArr[4][1]:#.##} * x2 + {coefArr[4][2]:#.##} * x4 + {coefArr[4][3]:#.##} * x2^2 + {coefArr[4][4]:#.##} * x4^2 + {coefArr[4][5]:#.##} * x2 * x4");
-			sel.Functions.Add($"f6(x3,x4) = {coefArr[5][0]:#.##} + {coefArr[5][1]:#.##} * x3 + {coefArr[5][2]:#.##} * x4 + {coefArr[5][3]:#.##} * x3^2 + {coefArr[5][4]:#.##} * x4^2 + {coefArr[5][5]:#.##} * x3 * x4");
+			var d = new Dictionary<string,string>();
+
+			d["x1x2"] =
+				$"f1(x1,x2) = {coefArr[0][0]:#.##} + {coefArr[0][1]:#.##} * x1 + {coefArr[0][2]:#.##} * x2 + {coefArr[0][3]:#.##} * x1^2 + {coefArr[0][4]:#.##} * x2^2 + {coefArr[0][5]:#.##} * x1 * x2";
+			d["x1x3"] =
+				$"f2(x1,x3) = {coefArr[1][0]:#.##} + {coefArr[1][1]:#.##} * x1 + {coefArr[1][2]:#.##} * x3 + {coefArr[1][3]:#.##} * x1^2 + {coefArr[1][4]:#.##} * x3^2 + {coefArr[1][5]:#.##} * x1 * x3";
+			d["x1x4"] =
+				$"f3(x1,x4) = {coefArr[2][0]:#.##} + {coefArr[2][1]:#.##} * x1 + {coefArr[2][2]:#.##} * x4 + {coefArr[2][3]:#.##} * x1^2 + {coefArr[2][4]:#.##} * x4^2 + {coefArr[2][5]:#.##} * x1 * x4";
+			d["x2x3"] =
+				$"f4(x2,x3) = {coefArr[3][0]:#.##} + {coefArr[3][1]:#.##} * x2 + {coefArr[3][2]:#.##} * x3 + {coefArr[3][3]:#.##} * x2^2 + {coefArr[3][4]:#.##} * x3^2 + {coefArr[3][5]:#.##} * x2 * x3";
+			d["x2x4"] =
+				$"f5(x2,x4) = {coefArr[4][0]:#.##} + {coefArr[4][1]:#.##} * x2 + {coefArr[4][2]:#.##} * x4 + {coefArr[4][3]:#.##} * x2^2 + {coefArr[4][4]:#.##} * x4^2 + {coefArr[4][5]:#.##} * x2 * x4";
+			d["x3x4"] =
+				$"f6(x3,x4) = {coefArr[5][0]:#.##} + {coefArr[5][1]:#.##} * x3 + {coefArr[5][2]:#.##} * x4 + {coefArr[5][3]:#.##} * x3^2 + {coefArr[5][4]:#.##} * x4^2 + {coefArr[5][5]:#.##} * x3 * x4";
+			foreach (var s in bestFunc)
+			{
+				sel.Functions.Add(d[s]);
+			}
+
+			
 
 			sel.Eps.Add($"Eps^2 = {epsArray[0]:#.##}");
 			sel.Eps.Add($"Eps^2 = {epsArray[1]:#.##}");
 			sel.Eps.Add($"Eps^2 = {epsArray[2]:#.##}");
 			sel.Eps.Add($"Eps^2 = {epsArray[3]:#.##}");
-			sel.Eps.Add($"Eps^2 = {epsArray[4]:#.##}");
-			sel.Eps.Add($"Eps^2 = {epsArray[5]:#.##}");
+			//sel.Eps.Add($"Eps^2 = {epsArray[4]:#.##}");
+			//sel.Eps.Add($"Eps^2 = {epsArray[5]:#.##}");
 
 			Selection.Add(sel);
 		}
@@ -423,5 +600,28 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 		}
 	}
 
+	class MguaParams
+	{
+		public double? EpsilonSquaredMin { get; set; }
+		public double[][] Sample { get; set; }
+	}
 
+	class TrainingCheckingSample
+	{
+		public double[][] TrainingSample { get; set; }
+		public double[][] CheckingSample { get; set; }
+	}
+
+	class Row
+	{
+		public FunctionPar[] Pars { get; set; }
+	}
+
+	class FunctionPar
+	{
+		public string Name { get; set; }
+
+		public double X1 { get; set; }
+		public double X2 { get; set; }
+	}
 }
