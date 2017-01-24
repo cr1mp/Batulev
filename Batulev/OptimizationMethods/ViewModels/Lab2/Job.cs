@@ -1,8 +1,6 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using Microsoft.Practices.ObjectBuilder2;
@@ -11,7 +9,7 @@ using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab2
 {
-	public class Job : BaseJob
+	public class Job : TimeBaseJob
 	{
 		private List<ResultType> results = new List<ResultType>();
 		private string _function;
@@ -76,7 +74,7 @@ namespace OptimizationMethods.ViewModels.Lab2
 		{
 			get
 			{
-				_result = _isMax ? Compute($"Max[{{ {GetResults()} }}]") : Compute($"Min[{{ {GetResults()} }}]");
+				EvaluateTime(() => _result = _isMax ? Compute($"Max[{{ {GetResults()} }}]") : Compute($"Min[{{ {GetResults()} }}]"));
 				OnPropertyChanged(nameof(ResultF));
 				OnPropertyChanged(nameof(Ks));
 				return _result;

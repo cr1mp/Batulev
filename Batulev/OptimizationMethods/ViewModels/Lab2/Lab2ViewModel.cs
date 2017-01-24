@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Prism.Mvvm;
 using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab2
 {
-	public class Lab2ViewModel : BaseJob
+	public class Lab2ViewModel : TimeBaseJob
 	{
-		List<ResultType> results = new List<ResultType>();
-		string _result;
+		private List<ResultType> results = new List<ResultType>();
+		private string _result;
 
 		public Lab2ViewModel(MathKernel mathKernel)
 			: base(mathKernel)
@@ -27,7 +24,7 @@ namespace OptimizationMethods.ViewModels.Lab2
 		{
 			get
 			{
-				_result = Compute($"Max[{{ {GetResults()} }}]");
+				EvaluateTime(() => _result = Compute($"Max[{{ {GetResults()} }}]")); ;
 				OnPropertyChanged(nameof(ResultF));
 				OnPropertyChanged(nameof(K1));
 				OnPropertyChanged(nameof(K2));
@@ -41,11 +38,8 @@ namespace OptimizationMethods.ViewModels.Lab2
 
 		public string K2 => string.Join(",", results.Where(x => x.Max == _result).Select(x => x.k2));
 
-
-
 		private string GetResults()
 		{
-
 			results.Clear();
 
 			var sb = new StringBuilder();
@@ -78,7 +72,6 @@ namespace OptimizationMethods.ViewModels.Lab2
 			}
 
 			return result;
-
 		}
 	}
 }
