@@ -187,6 +187,7 @@ namespace MathematicalMethodsAnalysisComplexSystems.ViewModel
 			// Nвыб = Nобуч + Nпров
 			var trainingCheckingSample = DivideTrainingCheckingSample(mguaParams.Sample);
 
+			// Формирование попарных сочетаний входных переменных.
 			var parX = GetAllParX(mguaParams.Sample);
 
 			// 2. На обучающей выборке вычисляются коэффициенты регрессии.

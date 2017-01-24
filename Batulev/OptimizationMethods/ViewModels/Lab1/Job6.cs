@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wolfram.NETLink;
+﻿using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
 {
-	public class Job6:BaseJob
+	public class Job6 : BaseJob
 	{
 		private string _a;
 		private string _b;
 
-		public Job6(MathKernel mathKernel) 
+		public Job6(MathKernel mathKernel)
 			: base(mathKernel)
 		{
 		}

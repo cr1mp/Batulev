@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using Microsoft.Practices.ObjectBuilder2;
 using Prism.Mvvm;
 using Wolfram.NETLink;
@@ -10,15 +8,13 @@ namespace OptimizationMethods.ViewModels.Lab1
 {
 	public class Job1 : BaseJob
 	{
-
 		private string _in1;
 		private string _job2;
 
-		public Job1( MathKernel mathKernel)
-			:base(mathKernel)
+		public Job1(MathKernel mathKernel)
+			: base(mathKernel)
 		{
 			Unknown = new ObservableCollection<Point>();
-
 		}
 
 		public ObservableCollection<Point> Unknown { get; set; }
@@ -67,8 +63,6 @@ namespace OptimizationMethods.ViewModels.Lab1
 		{
 			return Compute($"Simplify[{input}]");
 		}
-
-		
 	}
 
 	public class Point : BindableBase

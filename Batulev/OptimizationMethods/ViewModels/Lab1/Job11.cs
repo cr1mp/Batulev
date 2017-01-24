@@ -2,8 +2,9 @@
 
 namespace OptimizationMethods.ViewModels.Lab1
 {
-	public class Job11 : Job7 {
-		public Job11(MathKernel mathKernel) 
+	public class Job11 : Job7
+	{
+		public Job11(MathKernel mathKernel)
 			: base(mathKernel)
 		{
 		}

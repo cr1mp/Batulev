@@ -1,15 +1,13 @@
-using System;
 using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
 {
 	public class Job2 : ImageBaseJob
 	{
-
 		private string _x1;
 
-		public Job2( MathKernel mathKernel)
-			:base(mathKernel)
+		public Job2(MathKernel mathKernel)
+			: base(mathKernel)
 		{
 		}
 
@@ -29,6 +27,5 @@ namespace OptimizationMethods.ViewModels.Lab1
 		{
 			return "Erf[x]";
 		}
-
 	}
 }

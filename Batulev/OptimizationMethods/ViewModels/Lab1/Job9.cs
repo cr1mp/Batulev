@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using Wolfram.NETLink;
+﻿using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
 {

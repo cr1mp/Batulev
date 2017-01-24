@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
@@ -11,14 +8,16 @@ namespace OptimizationMethods.ViewModels.Lab1
 	{
 		private string _step;
 
-		public Job7(MathKernel mathKernel) 
+		public Job7(MathKernel mathKernel)
 			: base(mathKernel)
 		{
-			PropertyChanged += (o, e) => {
-				if (e.PropertyName == nameof(Img) )
+			PropertyChanged += (o, e) =>
+			{
+				if (e.PropertyName == nameof(Img))
 				{
 					UpdateView();
-				} };
+				}
+			};
 		}
 
 		private void UpdateView()
@@ -46,7 +45,7 @@ namespace OptimizationMethods.ViewModels.Lab1
 			return "y=3*x^3-2*x^2+7";
 		}
 
-		string GetResults()
+		private string GetResults()
 		{
 			var sb = new StringBuilder();
 
@@ -77,6 +76,5 @@ namespace OptimizationMethods.ViewModels.Lab1
 		{
 			return $"3*({x})^3-2*({x})^2+7";
 		}
-
 	}
 }

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Wolfram.NETLink;
 
 namespace OptimizationMethods.ViewModels.Lab1
 {
 	public class Job5 : BaseJob
 	{
-
 		private string _step;
 		private string _aMin;
 		private string _aMax;
@@ -26,7 +20,7 @@ namespace OptimizationMethods.ViewModels.Lab1
 			get { return _aMin; }
 			set
 			{
-				_aMin=value;
+				_aMin = value;
 				OnPropertyChanged(nameof(MaxResult));
 				OnPropertyChanged(nameof(MinResult));
 			}
@@ -57,12 +51,11 @@ namespace OptimizationMethods.ViewModels.Lab1
 			}
 		}
 
-		public string MaxResult =>Compute($"Max[{{ {GetResults()} }}]" );
+		public string MaxResult => Compute($"Max[{{ {GetResults()} }}]");
 
 		public string MinResult => Compute($"Min[{{ {GetResults()} }}]");
 
-
-		string GetResults()
+		private string GetResults()
 		{
 			var sb = new StringBuilder();
 
@@ -75,7 +68,7 @@ namespace OptimizationMethods.ViewModels.Lab1
 			{
 				for (double i = min; i <= max; i = i + step)
 				{
-					sb.Append(Compute($"N[x /.Solve[{GetEquation(i)}, x, Reals]]")+",");
+					sb.Append(Compute($"N[x /.Solve[{GetEquation(i)}, x, Reals]]") + ",");
 				}
 			}
 
