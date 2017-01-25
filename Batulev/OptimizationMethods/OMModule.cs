@@ -45,6 +45,9 @@ namespace OptimizationMethods
 			_unityContainer.RegisterType<Lab2View>();
 			_unityContainer.RegisterTypeForNavigation<Lab2View>();
 
+			_unityContainer.RegisterType<Lab3View>();
+			_unityContainer.RegisterTypeForNavigation<Lab3View>();
+
 			_regionManager.RegisterViewWithRegion(RegionNames.MainNavigationRegion,typeof(OptimizationMethodsNavigationItemView));
 		}
 	}

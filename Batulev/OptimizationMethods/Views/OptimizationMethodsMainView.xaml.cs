@@ -24,6 +24,7 @@ namespace OptimizationMethods.Views
 	{
 		private static Uri Lab1ViewUri = new Uri("/Lab1View", UriKind.Relative);
 		private static Uri Lab2ViewUri = new Uri("/Lab2View", UriKind.Relative);
+		private static Uri Lab3ViewUri = new Uri("/Lab3View", UriKind.Relative);
 
 		public OptimizationMethodsMainView(IRegionManager regionManager)
 			:base(regionManager, RegionNames.MainContentRegion)
@@ -35,6 +36,7 @@ namespace OptimizationMethods.Views
 		{
 			Lab1.IsChecked=(uri== Lab1ViewUri);
 			Lab2.IsChecked=(uri== Lab2ViewUri);
+			Lab3.IsChecked=(uri== Lab3ViewUri);
 		}
 
 		private void Lab1_OnClick(object sender, RoutedEventArgs e)
@@ -45,10 +47,11 @@ namespace OptimizationMethods.Views
 		private void Lab2_OnClick(object sender, RoutedEventArgs e)
 		{
 			_regionManager.RequestNavigate(RegionNames.MainContentRegion, Lab2ViewUri);
-
 		}
 
-
-		
+		private void Lab3_OnClick(object sender, RoutedEventArgs e)
+		{
+			_regionManager.RequestNavigate(RegionNames.MainContentRegion, Lab3ViewUri);
+		}
 	}
 }

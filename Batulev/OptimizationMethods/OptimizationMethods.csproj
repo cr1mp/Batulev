@@ -113,8 +113,12 @@
     <Compile Include="ViewModels\Lab2\Restriction.cs" />
     <Compile Include="ViewModels\Lab2\ResultType.cs" />
     <Compile Include="ViewModels\Lab2\TimeBaseJob.cs" />
+    <Compile Include="ViewModels\Laba3\Lab3ViewModel.cs" />
     <Compile Include="Views\Labs\Lab1View.xaml.cs">
       <DependentUpon>Lab1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Labs\Lab3View.xaml.cs">
+      <DependentUpon>Lab3View.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Labs\Lab2View.xaml.cs">
       <DependentUpon>Lab2View.xaml</DependentUpon>
@@ -146,6 +150,10 @@
     <Page Include="Views\Labs\Lab1View.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Labs\Lab3View.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Labs\Lab2View.xaml">
       <SubType>Designer</SubType>
