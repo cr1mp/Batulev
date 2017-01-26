@@ -24,7 +24,7 @@ namespace OptimizationMethods.ViewModels.Lab4
 		{
 			_neuralNetwork = neuralNetwork;
 			NumberOfPeriods = 700;
-			StartGeneticAlgorithmCommand = new DelegateCommand(Start, () => neuralNetwork.IsLearnung);
+			StartGeneticAlgorithmCommand = new DelegateCommand(Start);
 		}
 
 		public ICommand StartGeneticAlgorithmCommand { get; set; }
@@ -65,6 +65,11 @@ namespace OptimizationMethods.ViewModels.Lab4
 			F = Convert.ToString(Math.Round(
 				NeuralNetworkHelper.NeuralNetworkEvaluate(Parents[0, 0], Parents[0, 1], Parents[0, 2], _neuralNetwork) * 2 * (max - min) + min, 3));
 
+			OnPropertyChanged(nameof(Time));
+			OnPropertyChanged(nameof(X1));
+			OnPropertyChanged(nameof(X2));
+			OnPropertyChanged(nameof(X3));
+			OnPropertyChanged(nameof(F));
 		}
 
 		void StartPopulation()
