@@ -13,16 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OptimizationMethods.ViewModels.Lab2;
-using OptimizationMethods.ViewModels.Lab3;
+using OptimizationMethods.ViewModels.Lab4;
 
 namespace OptimizationMethods.Views.Labs
 {
 	/// <summary>
 	/// Interaction logic for Lab3View.xaml
 	/// </summary>
-	public partial class Lab3View : UserControl
+	public partial class Lab4View : UserControl
 	{
-		public Lab3View(Lab3ViewModel model)
+		public Lab4View(Lab4ViewModel model)
 		{
 			InitializeComponent();
 			this.DataContext = model;

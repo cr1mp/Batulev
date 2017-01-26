@@ -1,0 +1,175 @@
+﻿<UserControl x:Class="OptimizationMethods.Views.Labs.Lab4View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OptimizationMethods.Views.Labs"
+             mc:Ignorable="d" 
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             d:DesignHeight="300" d:DesignWidth="300" >
+	<UserControl.Resources>
+		<Style TargetType="TextBlock">
+			<Setter Property="Margin" Value="10"/>
+		</Style>
+	</UserControl.Resources>
+
+	<controls:FlipView IsBannerEnabled="False"
+						   MouseOverGlowEnabled="False"
+						   >
+
+		<Grid DataContext="{Binding NeuralNetwork}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
+
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Grid.ColumnSpan="2"
+					   Text="Нейронная сеть"/>
+				  
+
+			<Button Grid.Row="1"
+					Grid.Column="0"
+					Grid.ColumnSpan="2"
+					Content="GenerateInputVariables"
+					Command="{Binding GenerateInputVariablesCommand}"/>
+			
+
+			<TextBlock Grid.Row="2"
+					   Grid.Column="0"
+					   Text="Итераций обучения"/>
+			<TextBlock Grid.Row="2"
+					   Grid.Column="1"
+					   Text="{Binding Iteration}"/>
+
+			<TextBlock Grid.Row="3"
+					   Grid.Column="0"
+					   Text="Величина ошибки"/>
+			<TextBlock Grid.Row="3"
+					   Grid.Column="1"
+					   Text="{Binding ErrorValue}"/>
+
+			<TextBlock Grid.Row="4"
+					   Grid.Column="0"
+					   Text="Затрачено времени"/>
+			<TextBlock Grid.Row="4"
+					   Grid.Column="1"
+					   Text="{Binding TrainingTime}"/>
+
+			<Button Grid.Row="5"
+					Grid.Column="0"
+					Content="Обучить"
+					Command="{Binding LearnNeuralNetworkCommand}"/>
+			<Button Grid.Row="5"
+					Grid.Column="1"
+					Content="Переобучить"
+					Command="{Binding RetrainNeuralNetworkCommand}"/>
+
+			<Button Grid.Row="6"
+					Grid.Column="0"
+					Content="Загрузить"
+					Command="{Binding LoadNeuralNetworkCommand}"/>
+			<Button Grid.Row="6"
+					Grid.Column="1"
+					Content="Сохранить"
+					Command="{Binding SaveNeuralNetworkCommand}"/>
+
+			<DataGrid Grid.Row="7"
+					  Grid.Column="0"
+					  Grid.ColumnSpan="2"
+					  ItemsSource="{Binding Result}"/>
+		</Grid>
+
+		<Grid DataContext="{Binding GeneticAlgorithm}">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+
+			</Grid.RowDefinitions>
+
+			<TextBlock Grid.Row="0"
+					   Grid.Column="0"
+					   Grid.ColumnSpan="2"
+					   Text="Генетический алгоритм"/>
+
+			<TextBlock Grid.Row="1"
+					   Grid.Column="0"
+					   Text="Количество эпох"/>
+			<TextBox Grid.Row="1"
+					   Grid.Column="1"
+					   Text="{Binding NumberOfPeriods}"
+				   />
+
+			<TextBlock Grid.Row="2"
+					   Grid.Column="0"
+					   Text="X1"/>
+			<TextBlock Grid.Row="2"
+					   Grid.Column="1"
+					   Text="{Binding X1}"
+				   />
+
+			<TextBlock Grid.Row="3"
+					   Grid.Column="0"
+					   Text="X2"/>
+			<TextBlock Grid.Row="3"
+					   Grid.Column="1"
+					   Text="{Binding X2}"
+				   />
+
+			<TextBlock Grid.Row="4"
+					   Grid.Column="0"
+					   Text="X3"/>
+			<TextBlock Grid.Row="4"
+					   Grid.Column="1"
+					   Text="{Binding X3}"
+				   />
+
+			<TextBlock Grid.Row="5"
+					   Grid.Column="0"
+					   Text="F"/>
+			<TextBlock Grid.Row="5"
+					   Grid.Column="1"
+					   Text="{Binding F}"
+			/>
+
+			<TextBlock Grid.Row="6"
+					   Grid.Column="0"
+					   Text="Time"/>
+			<TextBlock Grid.Row="6"
+					   Grid.Column="1"
+					   Text="{Binding Time}"
+			/>
+
+			<Button Grid.Row="7"
+					Grid.Column="0"
+					Grid.ColumnSpan="2"
+					Content="Start"
+					Command="{Binding StartGeneticAlgorithmCommand}"/>
+			
+		</Grid>
+
+	</controls:FlipView>
+</UserControl>
+

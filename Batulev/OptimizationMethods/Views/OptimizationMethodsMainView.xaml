@@ -13,5 +13,6 @@
 		<ToggleButton x:Name="Lab1" Click="Lab1_OnClick">Лабораторная работа №1</ToggleButton>
 		<ToggleButton x:Name="Lab2" Click="Lab2_OnClick">Лабораторная работа №2</ToggleButton>
 		<ToggleButton x:Name="Lab3" Click="Lab3_OnClick">Лабораторная работа №3</ToggleButton>
+		<ToggleButton x:Name="Lab4" Click="Lab4_OnClick">Лабораторная работа №4</ToggleButton>
 	</ItemsControl>
 </we:NavigationItemUserControl>

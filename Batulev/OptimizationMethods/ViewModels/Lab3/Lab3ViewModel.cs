@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using Wolfram.NETLink;
 
-namespace OptimizationMethods.ViewModels.Laba3
+namespace OptimizationMethods.ViewModels.Lab3
 {
  public class Lab3ViewModel : BaseJob
  {
